@@ -1,0 +1,14 @@
+{
+  "name": "SM503",
+  "description": "SM503 ",
+  "version": "0.0.0",
+  "homepage": "https://github.com/ahmetsametyuzlu/sm503",
+  "license": "private",
+  "private": true,
+  "dependencies": {
+    "bootbox": "latest",
+    "bootstrap": "latest",
+    "font-awesome": "latest",
+    "jquery": "latest"
+  }
+}
