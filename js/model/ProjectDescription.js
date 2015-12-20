@@ -13,9 +13,6 @@ var Model_ProjectDescription = function () {
     me.plannedCompletionDate = '';
 
     me.setData = function (data) {
-        if (!data || !data.projectId) {
-            return false;
-        }
         me.projectId = parseInt(data.projectId);
         me.name = data.name;
         me.description = data.description;

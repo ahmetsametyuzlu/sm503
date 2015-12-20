@@ -53,7 +53,4 @@ var Main = function () {
 };
 
 // Start all the staff
-//new Main().init();
-
-var m = new Main();
-m.init();
+new Main().init();
