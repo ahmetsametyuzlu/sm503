@@ -127,7 +127,7 @@ var Ui_Project = function () {
         me.html += '                <label>Determined Budget</label>';
         me.html += '                <div class="input-group">';
         me.html += '                    <span class="input-group-addon">$</span>';
-        me.html += '                    <input name="determinedBudged" type="text" class="form-control">';
+        me.html += '                    <input name="determinedBudged" type="number" class="form-control">';
         me.html += '                    <span class="input-group-addon">.00</span>';
         me.html += '                </div>';
         me.html += '            </div>';
@@ -135,7 +135,7 @@ var Ui_Project = function () {
         me.html += '                <label>Estimated Cost</label>';
         me.html += '                <div class="input-group">';
         me.html += '                    <span class="input-group-addon">$</span>';
-        me.html += '                    <input name="estimatedCost" type="text" class="form-control">';
+        me.html += '                    <input name="estimatedCost" type="number" class="form-control">';
         me.html += '                    <span class="input-group-addon">.00</span>';
         me.html += '                </div>';
         me.html += '            </div>';
@@ -192,6 +192,14 @@ var Ui_Project = function () {
 
         me.page.empty();
         me.page.html(me.html);
+
+        $("[name=projectId]").change(function () {
+            var projectId = parseInt($(this).val());
+            if (me.projectModel.getIndex(projectId) !== false) {
+                bootbox.alert('There is already a defined project in the system with this project id #' + String(projectId) + '. ');
+                $("[name=projectId]").val('');
+            }
+        });
     };
 
     return me;

@@ -5,9 +5,14 @@ var Ui_Developer = function () {
     var me = new Ui_Base();
 
     me.developerModel = null;
+    me.projectModel = null;
 
     me.setDeveloperModel = function (developerModel) {
         me.developerModel = developerModel;
+    };
+
+    me.setProjectModel = function (projectModel) {
+        me.projectModel = projectModel;
     };
 
     me.init = function () {
@@ -41,7 +46,14 @@ var Ui_Developer = function () {
             var data = form.serializeArray();
             var dataObj = {};
             for (var i = 0; i < data.length; i++) {
-                dataObj[data[i].name] = data[i].value;
+                if (data[i].name == 'assignedProjectIds') {
+                    if (!dataObj[data[i].name]) {
+                        dataObj[data[i].name] = [];
+                    }
+                    dataObj[data[i].name].push(data[i].value);
+                } else {
+                    dataObj[data[i].name] = data[i].value;
+                }
                 if (data[i].value == '') {
                     bootbox.alert('All the fields are required. Fill them! ');
                     disabled.prop('disabled', true);
@@ -121,6 +133,12 @@ var Ui_Developer = function () {
         me.html += '        <label>Title</label>';
         me.html += '        <input name="title" type="text" class="form-control" required>';
         me.html += '    </div>';
+        me.html += '    <div class="form-group">';
+        me.html += '        <label>Projects</label>';
+        for (var i = 0; i < me.projectModel.projects.length; i++) {
+            me.html += '    <div class="checkbox"><label><input type="checkbox" name="assignedProjectIds" value="' + me.projectModel.projects[i].projectId + '"> ' + me.projectModel.projects[i].name + '</label></div>';
+        }
+        me.html += '    </div>';
         me.html += '    <button type="button" data-form-action="developer-submit" class="btn btn-success"><i class="fa fa-save"></i> Submit</button>';
         me.html += '</form>';
     };
@@ -143,6 +161,9 @@ var Ui_Developer = function () {
         input.developerId.val(developer.developerId);
         input.name.val(developer.name);
         input.title.val(developer.title);
+        for (var i = 0; i < developer.assignedProjectIds.length; i++) {
+            $("[name=assignedProjectIds][value=" + String(developer.assignedProjectIds[i]) + "]").prop('checked', true);
+        }
     };
 
     me.renderCreate = function () {
@@ -152,6 +173,14 @@ var Ui_Developer = function () {
 
         me.page.empty();
         me.page.html(me.html);
+
+        $("[name=developerId]").change(function () {
+            var developerId = parseInt($(this).val());
+            if (me.developerModel.getIndex(developerId) !== false) {
+                bootbox.alert('There is already a defined developer in the system with this developer id #' + String(developerId) + '. ');
+                $("[name=developerId]").val('');
+            }
+        });
     };
 
     return me;

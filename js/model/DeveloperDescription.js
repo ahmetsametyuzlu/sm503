@@ -10,7 +10,7 @@ var Model_DeveloperDescription = function () {
     me.assignedProjectIds = [];
 
     me.setData = function (data) {
-        me.developerId = data.developerId;
+        me.developerId = parseInt(data.developerId);
         me.name = data.name;
         me.title = data.title;
         me.assignedProjectIds = data.assignedProjectIds;

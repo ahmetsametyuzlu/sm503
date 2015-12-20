@@ -17,7 +17,7 @@ var Model_Developer = function () {
     me.create = function (developerData) {
         var developer = new Model_DeveloperDescription();
         developer.setData(developerData);
-        me.developers.push(developer);
+        me.developers.unshift(developer);
     };
 
     me.update = function (developerId, developerData) {

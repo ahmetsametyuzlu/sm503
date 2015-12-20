@@ -8,23 +8,29 @@ var Main = function () {
 
         //Data.clear();
 
+        // Models
+        me.creditModel = new Model_Credit();
+
+        me.projectModel = new Model_Project();
+        me.projectModel.init(Data.get('projects', []));
+
+        me.developerModel = new Model_Developer();
+        me.developerModel.init(Data.get('developers', []));
+
+        // Ui's
         me.homeUi = new Ui_Home();
         me.homeUi.init();
         me.homeUi.render();
 
-        me.creditModel = new Model_Credit();
         me.creditUi = new Ui_Credit();
         me.creditUi.setCreditModel(me.creditModel);
         me.creditUi.init();
 
-        me.developerModel = new Model_Developer();
-        me.developerModel.init(Data.get('developers', []));
         me.developerUi = new Ui_Developer();
         me.developerUi.setDeveloperModel(me.developerModel);
+        me.developerUi.setProjectModel(me.projectModel);
         me.developerUi.init();
 
-        me.projectModel = new Model_Project();
-        me.projectModel.init(Data.get('projects', []));
         me.projectUi = new Ui_Project();
         me.projectUi.setProjectModel(me.projectModel);
         me.projectUi.init();
