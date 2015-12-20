@@ -35,8 +35,21 @@ var Ui_Project = function () {
         $(document).on('click', 'button[data-form-action="project-submit"]', function (e) {
             e.preventDefault();
             var form = $(this).closest('form');
+            var disabled = form.find("[disabled]");
+            disabled.prop('disabled', false);
+
             var data = form.serializeArray();
-            console.log(data);
+            var dataObj = {};
+            for (var i = 0; i < data.length; i++) {
+                dataObj[data[i].name] = data[i].value;
+                if (data[i].value == '') {
+                    bootbox.alert('All the fields are required. Fill them! ');
+                    disabled.prop('disabled', true);
+                    return false;
+                }
+            }
+            me.projectModel.save(dataObj);
+
             me.renderList();
         });
 
@@ -55,22 +68,40 @@ var Ui_Project = function () {
     };
 
     me.renderList = function () {
-
         me.html = '';
         me.html += '<h1 class="main-title">Projects</h1>';
         if (me.projectModel.projects.length == 0) {
-            me.html += '<p>There is no defined project. Click <a href="#" class="btn btn-success btn-xs" data-page="project-create">here</a> to create a new one!</p>';
+            me.html += '<div class="jumbotron">';
+            me.html += '<p>There is no defined project. Click the button to create a new one!</p>';
+            me.html += '<p><a class="btn btn-success btn-lg" href="#" data-page="project-create"><i class="fa fa-plus"></i> Create New Project</a></p>';
+            me.html += '</div>';
         } else {
-            me.html += '<ul>';
+            me.html += '<div class="create-project-button"><a class="btn btn-success btn-sm" href="#" data-page="project-create"><i class="fa fa-plus"></i> Create New Project</a></div>';
+            me.html += '<table class="table table-bordered table-striped table-hover">';
+            me.html += '<thead>';
+            me.html += '    <tr>';
+            me.html += '        <th width="5%">Id</th>';
+            me.html += '        <th width="85%">Title</th>';
+            me.html += '        <th width="10%" class="text-center">Actions</th>';
+            me.html += '    </tr>';
+            me.html += '</thead>';
+            me.html += '<tbody>';
             for (var i = 0; i < me.projectModel.projects.length; i++) {
-                me.html += '<li>' + me.projectModel.projects[i].name + '</li>';
+                me.html += '    <tr>';
+                me.html += '        <td>#' + me.projectModel.projects[i].projectId + '</td>';
+                me.html += '        <td>' + me.projectModel.projects[i].name + '</td>';
+                me.html += '        <td class="text-center">';
+                me.html += '            <a href="#" class="btn btn-danger btn-xs" data-page="project-delete" data-project-id="' + me.projectModel.projects[i].projectId + '"><i class="fa fa-minus-square"></i></a>';
+                me.html += '            <a href="#" class="btn btn-success btn-xs" data-page="project-edit" data-project-id="' + me.projectModel.projects[i].projectId + '"><i class="fa fa-edit"></i></a>';
+                me.html += '        </td>';
+                me.html += '    </tr>';
             }
-            me.html += '</ul>';
+            me.html += '</tbody>';
+            me.html += '</table>';
         }
 
         me.page.empty();
         me.page.html(me.html);
-
     };
 
     me.form = function () {
@@ -78,7 +109,7 @@ var Ui_Project = function () {
         me.html += '    <div class="form-group">';
         me.html += '        <label>Project Id</label>';
         me.html += '        <div class="input-group">';
-        me.html += '            <span class="input-group-addon">@</span>';
+        me.html += '            <span class="input-group-addon">#</span>';
         me.html += '            <input name="projectId" type="number" class="form-control">';
         me.html += '        </div>';
         me.html += '    </div>';
@@ -133,17 +164,34 @@ var Ui_Project = function () {
 
         me.page.empty();
         me.page.html(me.html);
+
+        var project = me.projectModel.get(projectId);
+        var input = {
+            projectId: $("[name=projectId]"),
+            name: $("[name=name]"),
+            description: $("[name=description]"),
+            determinedBudged: $("[name=determinedBudged]"),
+            estimatedCost: $("[name=estimatedCost]"),
+            plannedStartDate: $("[name=plannedStartDate]"),
+            plannedCompletionDate: $("[name=plannedCompletionDate]"),
+        };
+        input.projectId.prop('disabled', true);
+        input.projectId.val(project.projectId);
+        input.name.val(project.name);
+        input.description.val(project.description);
+        input.determinedBudged.val(project.determinedBudged);
+        input.estimatedCost.val(project.estimatedCost);
+        input.plannedStartDate.val(project.plannedStartDate.toJSON().slice(0, 10));
+        input.plannedCompletionDate.val(project.plannedCompletionDate.toJSON().slice(0, 10));
     };
 
     me.renderCreate = function () {
-
         me.html = '';
         me.html += '<h1 class="main-title">Project Create</h1>';
         me.form();
 
         me.page.empty();
         me.page.html(me.html);
-
     };
 
     return me;

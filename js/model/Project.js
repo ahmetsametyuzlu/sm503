@@ -7,7 +7,7 @@ var Model_Project = function () {
     me.projects = [];
 
     me.init = function (projects) {
-        for (var i = 0; projects.length; i++) {
+        for (var i = 0; i < projects.length; i++) {
             var project = new Model_ProjectDescription();
             project.setData(projects[i]);
             me.projects.push(project);
@@ -17,15 +17,24 @@ var Model_Project = function () {
     me.create = function (projectData) {
         var project = new Model_ProjectDescription();
         project.setData(projectData);
-        me.projects.push(project);
+        me.projects.unshift(project);
     };
 
     me.update = function (projectId, projectData) {
         me.projects[me.getIndex(projectId)].setData(projectData);
     };
 
+    me.save = function (projectData) {
+        var projectId = parseInt(projectData.projectId);
+        if (me.getIndex(projectId) !== false) {
+            me.update(projectId, projectData);
+        } else {
+            me.create(projectData);
+        }
+    };
+
     me.delete = function (projectId) {
-        me.projects.split(me.getIndex(projectId), 1);
+        me.projects.splice(me.getIndex(projectId), 1);
     };
 
     me.get = function (projectId) {
@@ -33,11 +42,12 @@ var Model_Project = function () {
     };
 
     me.getIndex = function (projectId) {
-        for (var i = 0; me.projects.length; i++) {
+        for (var i = 0; i < me.projects.length; i++) {
             if (me.projects[i].projectId == projectId) {
                 return i;
             }
         }
+        return false;
     };
 
 };

@@ -29,7 +29,7 @@ var DataStorage = function () {
         // Set data value to key.
         me.data[key] = value;
         // Save current data after every set.
-        me.save();
+        //me.save();
         // Return for the data object for chaining.
         return me;
     };
@@ -54,6 +54,7 @@ var DataStorage = function () {
      * Save data object to local storage
      */
     me.save = function () {
+        //JSON.serializeToString()
         localStorage.setItem('data', JSON.stringify(me.data));
     };
 

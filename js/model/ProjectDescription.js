@@ -13,13 +13,28 @@ var Model_ProjectDescription = function () {
     me.plannedCompletionDate = '';
 
     me.setData = function (data) {
-        me.projectId = data.projectId;
+        if (!data || !data.projectId) {
+            return false;
+        }
+        me.projectId = parseInt(data.projectId);
         me.name = data.name;
         me.description = data.description;
-        me.determinedBudged = data.determinedBudged;
-        me.estimatedCost = data.estimatedCost;
+        me.determinedBudged = parseInt(data.determinedBudged);
+        me.estimatedCost = parseInt(data.estimatedCost);
         me.plannedStartDate = new Date(data.plannedStartDate);
         me.plannedCompletionDate = new Date(data.plannedCompletionDate);
-    }
+    };
+
+    me.getData = function () {
+        var data = {};
+        data.projectId = me.projectId;
+        data.name = me.name;
+        data.description = me.description;
+        data.determinedBudged = me.determinedBudged;
+        data.estimatedCost = me.estimatedCost;
+        data.plannedStartDate = me.plannedStartDate.toString();
+        data.plannedCompletionDate = me.plannedCompletionDate.toString();
+        return data;
+    };
 
 };

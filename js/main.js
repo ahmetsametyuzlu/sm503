@@ -6,6 +6,8 @@ var Main = function () {
 
     me.init = function () {
 
+        //Data.clear();
+
         me.homeUi = new Ui_Home();
         me.homeUi.init();
         me.homeUi.render();
@@ -34,12 +36,24 @@ var Main = function () {
     };
 
     me.save = function () {
-        Data.set('projects', me.developerModel.projects);
-        Data.set('developers', me.developerModel.developers);
+        var projects = [];
+        for (var i = 0; i < me.projectModel.projects.length; i++) {
+            projects.push(me.projectModel.projects[i].getData());
+        }
+        Data.set('projects', projects);
+
+        var developers = [];
+        for (var i = 0; i < me.developerModel.developers.length; i++) {
+            developers.push(me.developerModel.developers[i].getData());
+        }
+        Data.set('developers', developers);
+        Data.save();
     };
 
 };
 
 // Start all the staff
-new Main().init();
+//new Main().init();
 
+var m = new Main();
+m.init();
