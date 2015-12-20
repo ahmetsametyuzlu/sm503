@@ -9,6 +9,7 @@
     "bootbox": "latest",
     "bootstrap": "latest",
     "font-awesome": "latest",
-    "jquery": "latest"
+    "jquery": "latest",
+    "underscore": "latest"
   }
 }

@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
     <title>SM 503</title>
-    <meta name="description" content="">
-    <meta name="author" content="Ahmet Samet Yüzlü - Övül Cebe">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="author" content="Ahmet Samet Yüzlü, Övül Cebe">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Dependencies to ease pain and make things look beautiful. -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- App Styles -->
+    <link href="css/app.css" rel="stylesheet">
 </head>
 <body>
+
+<!-- Top navbar for navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -19,41 +25,51 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">SM 503</a>
+            <a class="navbar-brand" href="#" data-page="home">SM 503</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li class="dropdown-header">Nav header</li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
-                    </ul>
-                </li>
+                <li><a href="#" data-page="home">Home</a></li>
+                <li><a href="#" data-page="project-list">Projects</a></li>
+                <li><a href="#" data-page="developer-list">Developers</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="#">Credits</a></li>
+                <li><a href="#" data-page="credit">Credits</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
+<!-- Page -->
 <div class="container">
-
+    <div id="page"></div>
 </div>
 
+<!-- Dependencies to ease pain and make things look beautiful. -->
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/bootbox/bootbox.js"></script>
-<script src="js/init.js"></script>
+<script src="bower_components/underscore/underscore-min.js"></script>
+
+<!-- Modals -->
+<script src="js/model/Project.js"></script>
+<script src="js/model/ProjectDescription.js"></script>
+<script src="js/model/Developer.js"></script>
+<script src="js/model/DeveloperDescription.js"></script>
+<script src="js/model/Credit.js"></script>
+
+<!-- Ui classes -->
+<script src="js/ui/Base.js"></script>
+<script src="js/ui/Home.js"></script>
+<script src="js/ui/Project.js"></script>
+<script src="js/ui/Developer.js"></script>
+<script src="js/ui/Credit.js"></script>
+
+<!-- Data class -->
+<script src="js/Data.js"></script>
+
+<!-- Main class which initializes everything -->
+<script src="js/Main.js"></script>
 
 </body>
 </html>
