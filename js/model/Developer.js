@@ -1,53 +1,69 @@
 'use strict';
 
-var Model_Developer = function () {
+var Model_Developer = (function () {
 
-    var me = this;
+    var Model_Developer = function () {
 
-    me.developers = [];
+        var me = this;
 
-    me.init = function (developers) {
-        for (var i = 0; i < developers.length; i++) {
-            var developer = new Model_DeveloperDescription();
-            developer.setData(developers[i]);
-            me.developers.push(developer);
-        }
-    };
+        me.developers = [];
 
-    me.create = function (developerData) {
-        var developer = new Model_DeveloperDescription();
-        developer.setData(developerData);
-        me.developers.unshift(developer);
-    };
-
-    me.update = function (developerId, developerData) {
-        me.developers[me.getIndex(developerId)].setData(developerData);
-    };
-
-    me.save = function (developerData) {
-        var developerId = parseInt(developerData.developerId);
-        if (me.getIndex(developerId) !== false) {
-            me.update(developerId, developerData);
-        } else {
-            me.create(developerData);
-        }
-    };
-
-    me.delete = function (developerId) {
-        me.developers.splice(me.getIndex(developerId), 1);
-    };
-
-    me.get = function (developerId) {
-        return me.developers[me.getIndex(developerId)];
-    };
-
-    me.getIndex = function (developerId) {
-        for (var i = 0; i < me.developers.length; i++) {
-            if (me.developers[i].developerId == developerId) {
-                return i;
+        me.init = function () {
+            var developers = Data.get('developers');
+            for (var i = 0; i < developers.length; i++) {
+                var developer = new Model_DeveloperDescription();
+                developer.setData(developers[i]);
+                me.developers.push(developer);
             }
-        }
-        return false;
+        };
+
+        me.create = function (developerData) {
+            var developer = new Model_DeveloperDescription();
+            developer.setData(developerData);
+            me.developers.unshift(developer);
+        };
+
+        me.update = function (developerId, developerData) {
+            me.developers[me.getIndex(developerId)].setData(developerData);
+        };
+
+        me.save = function (developerData) {
+            var developerId = parseInt(developerData.developerId);
+            if (me.getIndex(developerId) !== false) {
+                me.update(developerId, developerData);
+            } else {
+                me.create(developerData);
+            }
+        };
+
+        me.delete = function (developerId) {
+            me.developers.splice(me.getIndex(developerId), 1);
+        };
+
+        me.get = function (developerId) {
+            return me.developers[me.getIndex(developerId)];
+        };
+
+        me.getIndex = function (developerId) {
+            for (var i = 0; i < me.developers.length; i++) {
+                if (me.developers[i].developerId == developerId) {
+                    return i;
+                }
+            }
+            return false;
+        };
+        
     };
 
-};
+    var instance;
+
+    return {
+        getInstance: function () {
+            if (!instance) {
+                instance = new Model_Developer();
+            }
+            return instance;
+        }
+    };
+
+})();

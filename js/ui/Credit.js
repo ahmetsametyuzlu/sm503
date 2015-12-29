@@ -2,7 +2,7 @@
 
 var Ui_Credit = function () {
 
-    var me = new Ui_Base();
+    var me = new Ui_Abstract();
 
     me.creditModel = null;
 
@@ -11,11 +11,6 @@ var Ui_Credit = function () {
     };
 
     me.init = function () {
-
-        $(document).on('click', 'a[data-page="credit"]', function (e) {
-            e.preventDefault();
-            me.render();
-        });
 
     };
 

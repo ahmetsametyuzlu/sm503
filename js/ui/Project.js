@@ -2,7 +2,7 @@
 
 var Ui_Project = function () {
 
-    var me = new Ui_Base();
+    var me = new Ui_Abstract();
 
     me.projectModel = null;
 
@@ -11,59 +11,6 @@ var Ui_Project = function () {
     };
 
     me.init = function () {
-
-        // Project List
-        $(document).on('click', 'a[data-page="project-list"]', function (e) {
-            e.preventDefault();
-            me.renderList();
-        });
-
-        // Project Create
-        $(document).on('click', 'a[data-page="project-create"]', function (e) {
-            e.preventDefault();
-            me.renderCreate();
-        });
-
-        // Project Edit
-        $(document).on('click', 'a[data-page="project-edit"]', function (e) {
-            e.preventDefault();
-            var projectId = parseInt($(this).data('project-id'));
-            me.renderEdit(projectId);
-        });
-
-        // Project Form Submit
-        $(document).on('click', 'button[data-form-action="project-submit"]', function (e) {
-            e.preventDefault();
-            var form = $(this).closest('form');
-            var disabled = form.find("[disabled]");
-            disabled.prop('disabled', false);
-
-            var data = form.serializeArray();
-            var dataObj = {};
-            for (var i = 0; i < data.length; i++) {
-                dataObj[data[i].name] = data[i].value;
-                if (data[i].value == '') {
-                    bootbox.alert('All the fields are required. Fill them! ');
-                    disabled.prop('disabled', true);
-                    return false;
-                }
-            }
-            me.projectModel.save(dataObj);
-
-            me.renderList();
-        });
-
-        // Project Delete
-        $(document).on('click', 'a[data-page="project-delete"]', function (e) {
-            e.preventDefault();
-            var projectId = parseInt($(this).data('project-id'));
-            bootbox.confirm('Are you sure to delete this project with all related data?', function (d) {
-                if (d) {
-                    me.projectModel.delete(projectId);
-                    me.renderList();
-                }
-            });
-        });
 
     };
 

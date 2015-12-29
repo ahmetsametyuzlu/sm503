@@ -1,6 +1,6 @@
 'use strict';
 
-var Ui_Base = function () {
+var Ui_Abstract = function () {
 
     var me = this;
 

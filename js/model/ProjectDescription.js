@@ -34,4 +34,5 @@ var Model_ProjectDescription = function () {
         return data;
     };
 
+    return me;
 };

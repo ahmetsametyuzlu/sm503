@@ -2,14 +2,9 @@
 
 var Ui_Home = function () {
 
-    var me = new Ui_Base();
+    var me = new Ui_Abstract();
 
     me.init = function () {
-
-        $(document).on('click', 'a[data-page="home"]', function (e) {
-            e.preventDefault();
-            me.render();
-        });
 
     };
 

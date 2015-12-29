@@ -1,8 +1,12 @@
 'use strict';
 
-var DataStorage = function () {
+var Data = (function () {
 
-    var me = this;
+    var Data = function () {
+
+    };
+
+    var me = new Data();
 
     me.data = {};
 
@@ -66,6 +70,8 @@ var DataStorage = function () {
         me.init();
     };
 
-};
+    return me;
 
-var Data = new DataStorage().init();
+})();
+
+Data.init();

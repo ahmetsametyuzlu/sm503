@@ -25,4 +25,6 @@ var Model_DeveloperDescription = function () {
         return data;
     };
 
+    return me;
+
 };
