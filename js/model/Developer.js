@@ -61,7 +61,7 @@ var Model_Developer = (function () {
         getInstance: function () {
             if (!instance) {
                 instance = new Model_Developer();
-                instance.init();
+                instance.init()
             }
             return instance;
         }

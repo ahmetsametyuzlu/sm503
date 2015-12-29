@@ -13,7 +13,7 @@ var Model_DeveloperDescription = function () {
         me.developerId = parseInt(data.developerId);
         me.name = data.name;
         me.title = data.title;
-        me.assignedProjectIds = data.assignedProjectIds;
+        me.assignedProjectIds = data.assignedProjectIds || [];
     };
 
     me.getData = function () {
