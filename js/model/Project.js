@@ -2,9 +2,7 @@
 
 Model.Project = (function () {
 
-    var Model = {};
-
-    Model.Project = function () {
+    var Object = function () {
 
         var me = this;
 
@@ -61,7 +59,7 @@ Model.Project = (function () {
     return {
         getInstance: function () {
             if (!instance) {
-                instance = new Model.Project();
+                instance = new Object();
                 instance.init();
             }
             return instance;

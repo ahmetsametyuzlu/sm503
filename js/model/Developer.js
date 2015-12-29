@@ -2,9 +2,7 @@
 
 Model.Developer = (function () {
 
-    var Model = {};
-
-    Model.Developer = function () {
+    var Object = function () {
 
         var me = this;
 
@@ -62,7 +60,7 @@ Model.Developer = (function () {
     return {
         getInstance: function () {
             if (!instance) {
-                instance = new Model.Developer();
+                instance = new Object();
                 instance.init()
             }
             return instance;

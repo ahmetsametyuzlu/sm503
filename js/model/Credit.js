@@ -2,9 +2,7 @@
 
 Model.Credit = (function () {
 
-    var Model = {};
-
-    Model.Credit = function () {
+    var Object = function () {
         var me = this;
 
         me.developers = [
@@ -46,7 +44,7 @@ Model.Credit = (function () {
     return {
         getInstance: function () {
             if (!instance) {
-                instance = new Model.Credit();
+                instance = new Object();
             }
             return instance;
         }
