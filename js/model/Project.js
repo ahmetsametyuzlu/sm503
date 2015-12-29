@@ -9,7 +9,7 @@ var Model_Project = (function () {
         me.projects = [];
 
         me.init = function () {
-            var projects = Data.get('projects');
+            var projects = Data.get('projects', []);
             for (var i = 0; i < projects.length; i++) {
                 var project = new Model_ProjectDescription();
                 project.setData(projects[i]);
@@ -60,6 +60,7 @@ var Model_Project = (function () {
         getInstance: function () {
             if (!instance) {
                 instance = new Model_Project();
+                instance.init();
             }
             return instance;
         }

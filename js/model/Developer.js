@@ -9,7 +9,7 @@ var Model_Developer = (function () {
         me.developers = [];
 
         me.init = function () {
-            var developers = Data.get('developers');
+            var developers = Data.get('developers', []);
             for (var i = 0; i < developers.length; i++) {
                 var developer = new Model_DeveloperDescription();
                 developer.setData(developers[i]);
@@ -52,7 +52,7 @@ var Model_Developer = (function () {
             }
             return false;
         };
-        
+
     };
 
     var instance;
@@ -61,6 +61,7 @@ var Model_Developer = (function () {
         getInstance: function () {
             if (!instance) {
                 instance = new Model_Developer();
+                instance.init();
             }
             return instance;
         }

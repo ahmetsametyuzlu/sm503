@@ -3,12 +3,10 @@
 var Data = (function () {
 
     var Data = function () {
-
+        data: {}
     };
 
     var me = new Data();
-
-    me.data = {};
 
     /**
      * Retrieve a value for data object
@@ -58,7 +56,6 @@ var Data = (function () {
      * Save data object to local storage
      */
     me.save = function () {
-        //JSON.serializeToString()
         localStorage.setItem('data', JSON.stringify(me.data));
     };
 

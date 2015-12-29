@@ -24,20 +24,23 @@ var Main = function () {
         };
     };
 
-    //me.save = function () {
-    //    var projects = [];
-    //    for (var i = 0; i < me.projectModel.projects.length; i++) {
-    //        projects.push(me.projectModel.projects[i].getData());
-    //    }
-    //    Data.set('projects', projects);
-    //
-    //    var developers = [];
-    //    for (var i = 0; i < me.developerModel.developers.length; i++) {
-    //        developers.push(me.developerModel.developers[i].getData());
-    //    }
-    //    Data.set('developers', developers);
-    //    Data.save();
-    //};
+    me.save = function () {
+        var projectModel = Model_Project.getInstance();
+        var developerModel = Model_Developer.getInstance();
+
+        var projects = [];
+        for (var i = 0; i < projectModel.projects.length; i++) {
+            projects.push(projectModel.projects[i].getData());
+        }
+        Data.set('projects', projects);
+
+        var developers = [];
+        for (var i = 0; i < developerModel.developers.length; i++) {
+            developers.push(developerModel.developers[i].getData());
+        }
+        Data.set('developers', developers);
+        Data.save();
+    };
 
 };
 

@@ -15,7 +15,6 @@ var Ui_Credit = function () {
     };
 
     me.render = function () {
-
         me.html = '';
         me.html += '<h1 class="main-title">Credits</h1>';
         me.html += '<h3>Engineers</h3>';
@@ -36,7 +35,6 @@ var Ui_Credit = function () {
 
         me.page.empty();
         me.page.html(me.html);
-
     };
 
     return me;
