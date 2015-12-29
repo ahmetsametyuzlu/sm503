@@ -1,6 +1,6 @@
 'use strict';
 
-var Controller_Credit = function () {
+Controller.Credit = function () {
 
     var me = this;
 
@@ -19,9 +19,9 @@ var Controller_Credit = function () {
 
     me.init = function () {
         // Set model(s)
-        me.setCreditModel(Model_Credit.getInstance());
+        me.setCreditModel(Model.Credit.getInstance());
         // Set ui
-        me.setCreditUi(new Ui_Credit());
+        me.setCreditUi(new View.Credit());
         me.addListeners();
     };
 

@@ -1,6 +1,6 @@
 'use strict';
 
-var Ui_Abstract = function () {
+View.Abstract = function () {
 
     var me = this;
 

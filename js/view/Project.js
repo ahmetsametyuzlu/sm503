@@ -1,8 +1,8 @@
 'use strict';
 
-var Ui_Project = function () {
+View.Project = function () {
 
-    var me = new Ui_Abstract();
+    var me = new View.Abstract();
 
     me.projectModel = null;
 

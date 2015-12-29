@@ -1,8 +1,10 @@
 'use strict';
 
-var Model_Project = (function () {
+Model.Project = (function () {
 
-    var Model_Project = function () {
+    var Model = {};
+
+    Model.Project = function () {
 
         var me = this;
 
@@ -11,14 +13,14 @@ var Model_Project = (function () {
         me.init = function () {
             var projects = Data.get('projects', []);
             for (var i = 0; i < projects.length; i++) {
-                var project = new Model_ProjectDescription();
+                var project = new Model.ProjectDescription();
                 project.setData(projects[i]);
                 me.projects.push(project);
             }
         };
 
         me.create = function (projectData) {
-            var project = new Model_ProjectDescription();
+            var project = new Model.ProjectDescription();
             project.setData(projectData);
             me.projects.unshift(project);
         };
@@ -59,7 +61,7 @@ var Model_Project = (function () {
     return {
         getInstance: function () {
             if (!instance) {
-                instance = new Model_Project();
+                instance = new Model.Project();
                 instance.init();
             }
             return instance;

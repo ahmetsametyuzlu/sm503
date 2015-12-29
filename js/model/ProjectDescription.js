@@ -1,6 +1,6 @@
 'use strict';
 
-var Model_ProjectDescription = function () {
+Model.ProjectDescription = function () {
 
     var me = this;
 

@@ -1,6 +1,6 @@
 'use strict';
 
-var Controller_Developer = function () {
+Controller.Developer = function () {
 
     var me = this;
 
@@ -25,10 +25,10 @@ var Controller_Developer = function () {
 
     me.init = function () {
         // Set model(s)
-        me.setDeveloperModel(Model_Developer.getInstance());
-        me.setProjectModel(Model_Project.getInstance());
+        me.setDeveloperModel(Model.Developer.getInstance());
+        me.setProjectModel(Model.Project.getInstance());
         // Set ui
-        me.setDeveloperUi(new Ui_Developer());
+        me.setDeveloperUi(new View.Developer());
         // Add listeners
         me.addListeners();
     };

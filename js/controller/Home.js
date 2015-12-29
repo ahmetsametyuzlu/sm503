@@ -1,6 +1,6 @@
 'use strict';
 
-var Controller_Home = function () {
+Controller.Home = function () {
 
     var me = this;
 
@@ -12,7 +12,7 @@ var Controller_Home = function () {
 
     me.init = function () {
         // Set ui
-        me.setHomeUi(new Ui_Home());
+        me.setHomeUi(new View.Home());
         // Add listeners
         me.addListeners();
         // Render homepage by default

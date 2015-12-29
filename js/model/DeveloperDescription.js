@@ -1,6 +1,6 @@
 'use strict';
 
-var Model_DeveloperDescription = function () {
+Model.DeveloperDescription = function () {
 
     var me = this;
 

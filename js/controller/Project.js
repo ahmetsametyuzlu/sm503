@@ -1,6 +1,6 @@
 'use strict';
 
-var Controller_Project = function () {
+Controller.Project = function () {
 
     var me = this;
 
@@ -19,9 +19,9 @@ var Controller_Project = function () {
 
     me.init = function () {
         // Set model(s)
-        me.setProjectModel(Model_Project.getInstance());
+        me.setProjectModel(Model.Project.getInstance());
         // Set ui
-        me.setProjectUi(new Ui_Project());
+        me.setProjectUi(new View.Project());
         // Add listeners
         me.addListeners();
     };

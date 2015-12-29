@@ -1,8 +1,8 @@
 'use strict';
 
-var Ui_Credit = function () {
+View.Credit = function () {
 
-    var me = new Ui_Abstract();
+    var me = new View.Abstract();
 
     me.creditModel = null;
 

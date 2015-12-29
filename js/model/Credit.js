@@ -1,8 +1,10 @@
 'use strict';
 
-var Model_Credit = (function () {
+Model.Credit = (function () {
 
-    var Model_Credit = function () {
+    var Model = {};
+
+    Model.Credit = function () {
         var me = this;
 
         me.developers = [
@@ -44,7 +46,7 @@ var Model_Credit = (function () {
     return {
         getInstance: function () {
             if (!instance) {
-                instance = new Model_Credit();
+                instance = new Model.Credit();
             }
             return instance;
         }

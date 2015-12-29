@@ -8,10 +8,10 @@ var Main = function () {
         // Data.clear();
 
         // Controllers
-        new Controller_Home().init();
-        new Controller_Credit().init();
-        new Controller_Developer().init();
-        new Controller_Project().init();
+        new Controller.Home().init();
+        new Controller.Credit().init();
+        new Controller.Developer().init();
+        new Controller.Project().init();
 
         // Default actions
         $(document).on('click', 'a[data-page], button[data-form-action]', function (e) {
@@ -25,8 +25,8 @@ var Main = function () {
     };
 
     me.save = function () {
-        var projectModel = Model_Project.getInstance();
-        var developerModel = Model_Developer.getInstance();
+        var projectModel = Model.Project.getInstance();
+        var developerModel = Model.Developer.getInstance();
 
         var projects = [];
         for (var i = 0; i < projectModel.projects.length; i++) {

@@ -1,8 +1,10 @@
 'use strict';
 
-var Model_Developer = (function () {
+Model.Developer = (function () {
 
-    var Model_Developer = function () {
+    var Model = {};
+
+    Model.Developer = function () {
 
         var me = this;
 
@@ -11,14 +13,14 @@ var Model_Developer = (function () {
         me.init = function () {
             var developers = Data.get('developers', []);
             for (var i = 0; i < developers.length; i++) {
-                var developer = new Model_DeveloperDescription();
+                var developer = new Model.DeveloperDescription();
                 developer.setData(developers[i]);
                 me.developers.push(developer);
             }
         };
 
         me.create = function (developerData) {
-            var developer = new Model_DeveloperDescription();
+            var developer = new Model.DeveloperDescription();
             developer.setData(developerData);
             me.developers.unshift(developer);
         };
@@ -60,7 +62,7 @@ var Model_Developer = (function () {
     return {
         getInstance: function () {
             if (!instance) {
-                instance = new Model_Developer();
+                instance = new Model.Developer();
                 instance.init()
             }
             return instance;

@@ -1,8 +1,8 @@
 'use strict';
 
-var Ui_Home = function () {
+View.Home = function () {
 
-    var me = new Ui_Abstract();
+    var me = new View.Abstract();
 
     me.init = function () {
 
