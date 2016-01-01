@@ -1,6 +1,6 @@
 'use strict';
 
-Model.ProjectDescription = function () {
+Model.IterationList = function () {
 
     var me = this;
 

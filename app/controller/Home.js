@@ -2,26 +2,30 @@
 
 Controller.Home = function () {
 
-    var me = this;
+    var me = Controller.Abstract();
 
-    me.homeUi = null;
+    me.setModel = function (modelName, modelObj) {
+        me.model[modelName] = modelObj;
+    };
 
-    me.setHomeUi = function (homeUi) {
-        me.homeUi = homeUi;
+    me.view.home = null;
+
+    me.setHomeView = function (homeView) {
+        me.view.home = homeView;
     };
 
     me.init = function () {
-        // Set ui
-        me.setHomeUi(new View.Home());
+        // Set view
+        me.setHomeView(new View.Home());
         // Add listeners
         me.addListeners();
         // Render homepage by default
-        me.homeUi.render();
+        me.view.home.render();
     };
 
     me.addListeners = function () {
         $(document).on('click', 'a[data-page="home"]', function (e) {
-            me.homeUi.render();
+            me.view.home.render();
         });
     };
 

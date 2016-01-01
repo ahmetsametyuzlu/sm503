@@ -1,13 +1,13 @@
 'use strict';
 
-View.Project = function () {
+View.WorkPackage = function () {
 
     var me = new View.Abstract();
 
-    me.model.projectList = null;
+    me.projectModel = null;
 
-    me.setProjectListModel = function (projectListModel) {
-        me.model.projectList = projectListModel;
+    me.setProjectModel = function (projectModel) {
+        me.projectModel = projectModel;
     };
 
     me.init = function () {
@@ -17,7 +17,7 @@ View.Project = function () {
     me.renderList = function () {
         me.html = '';
         me.html += '<h1 class="main-title">Projects</h1>';
-        if (me.model.projectList.projects.length == 0) {
+        if (me.projectModel.projects.length == 0) {
             me.html += '<div class="jumbotron">';
             me.html += '<p>There is no defined project. Click the button to create a new one!</p>';
             me.html += '<p><a class="btn btn-success btn-lg" href="#" data-page="project-create"><i class="fa fa-plus"></i> Create New Project</a></p>';
@@ -33,13 +33,13 @@ View.Project = function () {
             me.html += '    </tr>';
             me.html += '</thead>';
             me.html += '<tbody>';
-            for (var i = 0; i < me.model.projectList.projects.length; i++) {
+            for (var i = 0; i < me.projectModel.projects.length; i++) {
                 me.html += '    <tr>';
-                me.html += '        <td>#' + me.model.projectList.projects[i].projectId + '</td>';
-                me.html += '        <td>' + me.model.projectList.projects[i].name + '</td>';
+                me.html += '        <td>#' + me.projectModel.projects[i].projectId + '</td>';
+                me.html += '        <td>' + me.projectModel.projects[i].name + '</td>';
                 me.html += '        <td class="text-center">';
-                me.html += '            <a href="#" class="btn btn-danger btn-xs" data-page="project-delete" data-project-id="' + me.model.projectList.projects[i].projectId + '"><i class="fa fa-minus-square"></i></a>';
-                me.html += '            <a href="#" class="btn btn-success btn-xs" data-page="project-edit" data-project-id="' + me.model.projectList.projects[i].projectId + '"><i class="fa fa-edit"></i></a>';
+                me.html += '            <a href="#" class="btn btn-danger btn-xs" data-page="project-delete" data-project-id="' + me.projectModel.projects[i].projectId + '"><i class="fa fa-minus-square"></i></a>';
+                me.html += '            <a href="#" class="btn btn-success btn-xs" data-page="project-edit" data-project-id="' + me.projectModel.projects[i].projectId + '"><i class="fa fa-edit"></i></a>';
                 me.html += '        </td>';
                 me.html += '    </tr>';
             }
@@ -112,7 +112,7 @@ View.Project = function () {
         me.clear();
         me.page.html(me.html);
 
-        var project = me.model.projectList.get(projectId);
+        var project = me.projectModel.get(projectId);
         var input = {
             projectId: $("[name=projectId]"),
             name: $("[name=name]"),
@@ -142,7 +142,7 @@ View.Project = function () {
 
         $("[name=projectId]").change(function () {
             var projectId = parseInt($(this).val());
-            if (me.model.projectList.getIndex(projectId) !== false) {
+            if (me.projectModel.getIndex(projectId) !== false) {
                 bootbox.alert('There is already a defined project in the system with this project id #' + String(projectId) + '. ');
                 $("[name=projectId]").val('');
             }

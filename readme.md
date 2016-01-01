@@ -1,28 +1,12 @@
 Main url of the source code
 https://github.com/ahmetsametyuzlu/sm503
 
-Folder and file structure
+Folder structure
+
 ├── app
-│   ├── Data.js
-│   ├── Main.js
-│   ├── Namespace.js
 │   ├── controller
-│   │   ├── Credit.js
-│   │   ├── Developer.js
-│   │   ├── Home.js
-│   │   └── Project.js
 │   ├── model
-│   │   ├── Credit.js
-│   │   ├── Developer.js
-│   │   ├── DeveloperDescription.js
-│   │   ├── Project.js
-│   │   └── ProjectDescription.js
 │   └── view
-│       ├── Abstract.js
-│       ├── Credit.js
-│       ├── Developer.js
-│       ├── Home.js
-│       └── Project.js
 ├── asset
 │   ├── bower_components (3rd party tools)
 │   │   ├── bootbox
@@ -30,12 +14,15 @@ Folder and file structure
 │   │   ├── font-awesome
 │   │   ├── jquery
 │   │   └── underscore
-│   ├── css
-│   │   └── app.css
-│   └── img
-├── index.html
-└── readme.md
+│   ├── css (styling files for html)
+│   └── img (images used for the app)
 
 Assumptions
-The state of software will not be tracked with url bar. 
+
+The state of software will not be tracked with url bar.
+ 
 User will be using software with a up to date browser. >= IE10, Google Chrome, Firefox, Safari, Opera
+
+Namespaces will be defined in app/NameSpace.js file. They will be used as namespaces.
+ 
+ 

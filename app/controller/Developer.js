@@ -2,33 +2,33 @@
 
 Controller.Developer = function () {
 
-    var me = this;
+    var me = Controller.Abstract();
 
-    me.developerUi = null;
+    me.view.developer = null;
 
-    me.developerModel = null;
-    me.projectModel = null;
+    me.model.developer = null;
+    me.model.projectList = null;
 
-    me.setDeveloperUi = function (developerUi) {
-        me.developerUi = developerUi;
-        me.developerUi.setDeveloperModel(me.developerModel);
-        me.developerUi.setProjectModel(me.projectModel);
+    me.setDeveloperView = function (developerView) {
+        me.view.developer = developerView;
+        me.view.developer.setDeveloperModel(me.model.developer);
+        me.view.developer.setProjectListModel(me.model.projectList);
     };
 
     me.setDeveloperModel = function (developerModel) {
-        me.developerModel = developerModel;
+        me.model.developer = developerModel;
     };
 
-    me.setProjectModel = function (projectModel) {
-        me.projectModel = projectModel;
+    me.setProjectListModel = function (projectListModel) {
+        me.model.projectList = projectListModel;
     };
 
     me.init = function () {
         // Set model(s)
         me.setDeveloperModel(Model.Developer.getInstance());
-        me.setProjectModel(Model.Project.getInstance());
-        // Set ui
-        me.setDeveloperUi(new View.Developer());
+        me.setProjectListModel(Model.ProjectList.getInstance());
+        // Set view
+        me.setDeveloperView(new View.Developer());
         // Add listeners
         me.addListeners();
     };
@@ -37,18 +37,18 @@ Controller.Developer = function () {
 
         // Developer List
         $(document).on('click', 'a[data-page="developer-list"]', function (e) {
-            me.developerUi.renderList();
+            me.view.developer.renderList();
         });
 
         // Developer Create
         $(document).on('click', 'a[data-page="developer-create"]', function (e) {
-            me.developerUi.renderCreate();
+            me.view.developer.renderCreate();
         });
 
         // Developer Edit
         $(document).on('click', 'a[data-page="developer-edit"]', function (e) {
             var developerId = parseInt($(this).data('developer-id'));
-            me.developerUi.renderEdit(developerId);
+            me.view.developer.renderEdit(developerId);
         });
 
         // Developer Form Submit
@@ -75,8 +75,8 @@ Controller.Developer = function () {
                     return false;
                 }
             }
-            me.developerModel.save(dataObj);
-            me.developerUi.renderList();
+            me.model.developer.save(dataObj);
+            me.view.developer.renderList();
         });
 
         // Developer Delete
@@ -85,8 +85,8 @@ Controller.Developer = function () {
             var developerId = parseInt($(this).data('developer-id'));
             bootbox.confirm('Are you sure to delete this developer with all related data?', function (d) {
                 if (d) {
-                    me.developerModel.delete(developerId);
-                    me.developerUi.renderList();
+                    me.model.developer.delete(developerId);
+                    me.view.developer.renderList();
                 }
             });
         });

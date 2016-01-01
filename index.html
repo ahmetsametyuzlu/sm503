@@ -15,32 +15,10 @@
 </head>
 <body>
 
-<!-- Top navbar for navigation -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#" data-page="home">SM 503</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="#" data-page="home"><i class="fa fa-home"></i> Home</a></li>
-                <li><a href="#" data-page="project-list"><i class="fa fa-briefcase"></i> Projects</a></li>
-                <li><a href="#" data-page="developer-list"><i class="fa fa-users"></i> Developers</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" data-page="credit">Credits</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<!-- Header -->
+<header></header>
 
-<!-- Page -->
+<!-- Content -->
 <div class="container">
     <div id="page"></div>
 </div>
@@ -48,13 +26,13 @@
 <!-- Footer -->
 <footer>
     <div class="container">
-        &copy; Ahmet Samet Yüzlü, Övül Cebe <br>SM503 Project - v1.1
+        <i class="fa fa-copyright"></i> Ahmet Samet Yüzlü, Övül Cebe <br>SM503 Project - v1.1
     </div>
 </footer>
 
 <!-- Dependencies to ease pain and make things look beautiful. -->
 <script src="asset/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="asset/bower_components/bootstrap/dist/app/bootstrap.min.js"></script>
+<script src="asset/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="asset/bower_components/bootbox/bootbox.js"></script>
 <script src="asset/bower_components/underscore/underscore-min.js"></script>
 
@@ -62,14 +40,23 @@
 <script src="app/Namespace.js"></script>
 
 <!-- Controller classes -->
+<script src="app/controller/Abstract.js"></script>
 <script src="app/controller/Home.js"></script>
 <script src="app/controller/Project.js"></script>
 <script src="app/controller/Developer.js"></script>
+<script src="app/controller/WorkPackage.js"></script>
+<script src="app/controller/Iteration.js"></script>
+<script src="app/controller/Developer.js"></script>
 <script src="app/controller/Credit.js"></script>
+<script src="app/controller/Layout.js"></script>
 
 <!-- Model classes -->
-<script src="app/model/ProjectDescription.js"></script>
+<script src="app/model/WorkPackage.js"></script>
+<script src="app/model/WorkPackageList.js"></script>
+<script src="app/model/Iteration.js"></script>
+<script src="app/model/IterationList.js"></script>
 <script src="app/model/Project.js"></script>
+<script src="app/model/ProjectList.js"></script>
 <script src="app/model/DeveloperDescription.js"></script>
 <script src="app/model/Developer.js"></script>
 <script src="app/model/Credit.js"></script>
@@ -79,7 +66,10 @@
 <script src="app/view/Home.js"></script>
 <script src="app/view/Project.js"></script>
 <script src="app/view/Developer.js"></script>
+<script src="app/view/WorkPackage.js"></script>
+<script src="app/view/Iteration.js"></script>
 <script src="app/view/Credit.js"></script>
+<script src="app/view/Layout.js"></script>
 
 <!-- Data class -->
 <script src="app/Data.js"></script>

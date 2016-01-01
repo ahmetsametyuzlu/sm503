@@ -2,32 +2,31 @@
 
 Controller.Credit = function () {
 
-    var me = this;
+    var me = Controller.Abstract();
 
-    me.creditUi = null;
-
-    me.creditModel = null;
+    me.view.credit = null;
+    me.model.credit = null;
 
     me.setCreditModel = function (creditModel) {
-        me.creditModel = creditModel;
+        me.model.credit = creditModel;
     };
 
-    me.setCreditUi = function (creditUi) {
-        me.creditUi = creditUi;
-        me.creditUi.setCreditModel(me.creditModel);
+    me.setCreditView = function (creditView) {
+        me.view.credit = creditView;
+        me.view.credit.setCreditModel(me.model.credit);
     };
 
     me.init = function () {
         // Set model(s)
         me.setCreditModel(Model.Credit.getInstance());
-        // Set ui
-        me.setCreditUi(new View.Credit());
+        // Set view
+        me.setCreditView(new View.Credit());
         me.addListeners();
     };
 
     me.addListeners = function () {
         $(document).on('click', 'a[data-page="credit"]', function (e) {
-            me.creditUi.render();
+            me.view.credit.render();
         });
     };
 

@@ -1,25 +1,25 @@
 'use strict';
 
-Controller.Project = function () {
+Controller.WorkPackage = function () {
 
     var me = Controller.Abstract();
 
     me.view.project = null;
 
-    me.model.projectList = null;
+    me.projectModel = null;
 
     me.setProjectView = function (projectView) {
         me.view.project = projectView;
-        me.view.project.setProjectListModel(me.model.projectList);
+        me.view.project.setProjectModel(me.projectModel);
     };
 
-    me.setProjectListModel = function (projectListModel) {
-        me.model.projectList = projectListModel;
+    me.setProjectModel = function (projectModel) {
+        me.projectModel = projectModel;
     };
 
     me.init = function () {
         // Set model(s)
-        me.setProjectListModel(Model.ProjectList.getInstance());
+        me.setProjectModel(Model.Project.getInstance());
         // Set view
         me.setProjectView(new View.Project());
         // Add listeners
@@ -59,7 +59,7 @@ Controller.Project = function () {
                     return false;
                 }
             }
-            me.model.projectList.save(dataObj);
+            me.projectModel.save(dataObj);
 
             me.view.project.renderList();
         });
@@ -69,7 +69,7 @@ Controller.Project = function () {
             var projectId = parseInt($(this).data('project-id'));
             bootbox.confirm('Are you sure to delete this project with all related data?', function (d) {
                 if (d) {
-                    me.model.projectList.delete(projectId);
+                    me.projectModel.delete(projectId);
                     me.view.project.renderList();
                 }
             });

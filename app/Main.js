@@ -5,13 +5,14 @@ var Main = function () {
     var me = this;
 
     me.init = function () {
-         //Data.clear();
+        // Data.clear();
 
         // Controllers
         new Controller.Home().init();
         new Controller.Credit().init();
         new Controller.Developer().init();
         new Controller.Project().init();
+        new Controller.Layout().init();
 
         // Default actions
         $(document).on('click', 'a[data-page], button[data-form-action]', function (e) {
