@@ -43,6 +43,12 @@ Controller.Project = function () {
             me.view.project.renderEdit(projectId);
         });
 
+        // Project Detail
+        $(document).on('click', 'a[data-page="project-detail"]', function (e) {
+            var projectId = parseInt($(this).data('project-id'));
+            me.view.project.renderDetail(projectId);
+        });
+
         // Project Form Submit
         $(document).on('click', 'button[data-form-action="project-submit"]', function (e) {
             var form = $(this).closest('form');

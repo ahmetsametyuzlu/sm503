@@ -11,6 +11,8 @@ Controller.Layout = function () {
 
     me.setLayoutView = function (layoutView) {
         me.view.layout = layoutView;
+        me.view.layout.setLayoutModel(me.model.layout);
+        me.view.layout.setProjectListModel(me.model.projectList);
     };
 
     me.setLayoutModel = function (layoutModel) {
@@ -22,9 +24,10 @@ Controller.Layout = function () {
     };
 
     me.init = function () {
-        me.setLayoutView(new View.Layout());
         me.setProjectListModel(Model.ProjectList.getInstance());
         me.setLayoutModel(Model.Layout.getInstance());
+
+        me.setLayoutView(new View.Layout());
         // Add listeners
         me.addListeners();
         // Render layout by default
@@ -32,19 +35,27 @@ Controller.Layout = function () {
     };
 
     me.addListeners = function () {
-        $(document).on('click', 'a[data-page], button[data-form-action]', function (e) {
-            me.view.layout.render();
-        });
+        // When home clicked go into general mode
         $(document).on('click', 'a[data-page="home"]', function (e) {
-            if (me.model.activeProjectId !== null) {
-                me.model.activeProjectId = null;
+            if (me.model.layout.activeProjectId !== null) {
+                me.model.layout.activeProjectId = null;
                 me.view.layout.render();
             }
         });
-        $(document).on('click', 'a[data-page="project-edit"]', function (e) {
+        // When project detail is clicked go into project mode
+        $(document).on('click', 'a[data-page="project-detail"]', function (e) {
             var projectId = parseInt($(this).data('project-id'));
-            me.model.activeProjectId = projectId;
+            me.model.layout.activeProjectId = projectId;
             me.view.layout.render();
+        });
+        // When another project is selected go into project mode
+        $(document).on('click', 'a[data-page="project-detail"]', function (e) {
+            $("#project-select").change(function (e) {
+                me.model.layout.activeProjectId = parseInt($(this).val());
+                me.view.layout.render();
+                // Trigger click event on project detail page.
+                $('a[data-page="project-detail"]').first().click();
+            });
         });
     };
 

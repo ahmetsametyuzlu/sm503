@@ -28,8 +28,8 @@ View.Project = function () {
             me.html += '<thead>';
             me.html += '    <tr>';
             me.html += '        <th width="5%">Id</th>';
-            me.html += '        <th width="85%">Title</th>';
-            me.html += '        <th width="10%" class="text-center">Actions</th>';
+            me.html += '        <th width="80%">Title</th>';
+            me.html += '        <th width="15%" class="text-center">Actions</th>';
             me.html += '    </tr>';
             me.html += '</thead>';
             me.html += '<tbody>';
@@ -38,8 +38,9 @@ View.Project = function () {
                 me.html += '        <td>#' + me.model.projectList.projects[i].projectId + '</td>';
                 me.html += '        <td>' + me.model.projectList.projects[i].name + '</td>';
                 me.html += '        <td class="text-center">';
-                me.html += '            <a href="#" class="btn btn-danger btn-xs" data-page="project-delete" data-project-id="' + me.model.projectList.projects[i].projectId + '"><i class="fa fa-minus-square"></i></a>';
-                me.html += '            <a href="#" class="btn btn-success btn-xs" data-page="project-edit" data-project-id="' + me.model.projectList.projects[i].projectId + '"><i class="fa fa-edit"></i></a>';
+                me.html += '            <a href="#" class="btn btn-danger btn-xs" data-page="project-delete" data-project-id="' + me.model.projectList.projects[i].projectId + '" data-toggle="tooltip" data-placement="top" title="Delete Project"><i class="fa fa-minus-square"></i></a>';
+                me.html += '            <a href="#" class="btn btn-success btn-xs" data-page="project-edit" data-project-id="' + me.model.projectList.projects[i].projectId + '" data-toggle="tooltip" data-placement="top" title="Edit Project"><i class="fa fa-edit"></i></a>';
+                me.html += '            <a href="#" class="btn btn-default btn-xs" data-page="project-detail" data-project-id="' + me.model.projectList.projects[i].projectId + '" data-toggle="tooltip" data-placement="top" title="Project Detail"><i class="fa fa-info-circle"></i></a>';
                 me.html += '        </td>';
                 me.html += '    </tr>';
             }
@@ -49,6 +50,8 @@ View.Project = function () {
 
         me.clear();
         me.page.html(me.html);
+
+        $('[data-toggle="tooltip"]').tooltip();
     };
 
     me.form = function () {
@@ -130,6 +133,37 @@ View.Project = function () {
         input.estimatedCost.val(project.estimatedCost);
         input.plannedStartDate.val(project.plannedStartDate.toJSON().slice(0, 10));
         input.plannedCompletionDate.val(project.plannedCompletionDate.toJSON().slice(0, 10));
+    };
+
+    me.renderDetail = function (projectId) {
+        me.html = '';
+        me.html += '<h1 class="main-title">Project Detail</h1>';
+        me.form();
+
+        me.clear();
+        me.page.html(me.html);
+
+        var project = me.model.projectList.get(projectId);
+        var input = {
+            projectId: $("[name=projectId]"),
+            name: $("[name=name]"),
+            description: $("[name=description]"),
+            determinedBudged: $("[name=determinedBudged]"),
+            estimatedCost: $("[name=estimatedCost]"),
+            plannedStartDate: $("[name=plannedStartDate]"),
+            plannedCompletionDate: $("[name=plannedCompletionDate]"),
+        };
+        input.projectId.prop('disabled', true);
+        input.projectId.val(project.projectId);
+        input.name.val(project.name);
+        input.description.val(project.description);
+        input.determinedBudged.val(project.determinedBudged);
+        input.estimatedCost.val(project.estimatedCost);
+        input.plannedStartDate.val(project.plannedStartDate.toJSON().slice(0, 10));
+        input.plannedCompletionDate.val(project.plannedCompletionDate.toJSON().slice(0, 10));
+
+        $("form").find(":input").attr('disabled', true);
+        $("form button").remove();
     };
 
     me.renderCreate = function () {

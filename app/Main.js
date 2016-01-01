@@ -26,7 +26,7 @@ var Main = function () {
     };
 
     me.save = function () {
-        var projectModel = Model.Project.getInstance();
+        var projectModel = Model.ProjectList.getInstance();
         var developerModel = Model.Developer.getInstance();
 
         var projects = [];
