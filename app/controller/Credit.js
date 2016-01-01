@@ -2,7 +2,7 @@
 
 Controller.Credit = function () {
 
-    var me = Controller.Abstract();
+    var me = new Controller.Abstract();
 
     me.view.credit = null;
     me.model.credit = null;

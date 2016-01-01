@@ -28,4 +28,4 @@ View.Home = function () {
 
     return me;
 
-}
+};

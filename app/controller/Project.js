@@ -2,7 +2,7 @@
 
 Controller.Project = function () {
 
-    var me = Controller.Abstract();
+    var me = new Controller.Abstract();
 
     me.view.project = null;
 

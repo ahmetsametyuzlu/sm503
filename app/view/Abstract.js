@@ -13,6 +13,10 @@ View.Abstract = function () {
         me.page.empty();
     };
 
+    me.render = function () {
+
+    };
+
     return me;
 
 };

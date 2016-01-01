@@ -2,15 +2,15 @@
 
 Controller.Layout = function () {
 
-    var me = Controller.Abstract();
+    var me = new Controller.Abstract();
 
-    me.layoutView = null;
+    me.view.layout = null;
 
     me.model.layout = null;
     me.model.projectList = null;
 
     me.setLayoutView = function (layoutView) {
-        me.layoutView = layoutView;
+        me.view.layout = layoutView;
     };
 
     me.setLayoutModel = function (layoutModel) {
@@ -28,12 +28,23 @@ Controller.Layout = function () {
         // Add listeners
         me.addListeners();
         // Render layout by default
-        me.layoutView.render();
+        me.view.layout.render();
     };
 
     me.addListeners = function () {
         $(document).on('click', 'a[data-page], button[data-form-action]', function (e) {
-            me.layoutView.render();
+            me.view.layout.render();
+        });
+        $(document).on('click', 'a[data-page="home"]', function (e) {
+            if (me.model.activeProjectId !== null) {
+                me.model.activeProjectId = null;
+                me.view.layout.render();
+            }
+        });
+        $(document).on('click', 'a[data-page="project-edit"]', function (e) {
+            var projectId = parseInt($(this).data('project-id'));
+            me.model.activeProjectId = projectId;
+            me.view.layout.render();
         });
     };
 

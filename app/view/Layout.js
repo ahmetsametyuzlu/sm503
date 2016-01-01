@@ -2,7 +2,7 @@
 
 View.Layout = function () {
 
-    var me = this;
+    var me = new View.Abstract();
 
     me.header = $("header");
 

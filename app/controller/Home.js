@@ -2,11 +2,7 @@
 
 Controller.Home = function () {
 
-    var me = Controller.Abstract();
-
-    me.setModel = function (modelName, modelObj) {
-        me.model[modelName] = modelObj;
-    };
+    var me = new Controller.Abstract();
 
     me.view.home = null;
 

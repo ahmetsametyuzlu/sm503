@@ -2,7 +2,7 @@
 
 Controller.Developer = function () {
 
-    var me = Controller.Abstract();
+    var me = new Controller.Abstract();
 
     me.view.developer = null;
 

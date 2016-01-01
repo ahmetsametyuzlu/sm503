@@ -8,6 +8,10 @@ Model.Layout = (function () {
 
         me.activeProjectId = null;
 
+        me.init = function () {
+
+        };
+
         return me;
 
     };

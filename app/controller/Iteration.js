@@ -2,7 +2,7 @@
 
 Controller.Iteration = function () {
 
-    var me = Controller.Abstract();
+    var me = new Controller.Abstract();
 
     me.view.iteration = null;
 
