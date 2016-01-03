@@ -14,43 +14,6 @@ View.Phase = function () {
 
     };
 
-    me.renderList = function () {
-        me.html = '';
-        me.html += '<h1 class="main-title">Phases</h1>';
-        if (me.phaseModel.phases.length == 0) {
-            me.html += '<div class="jumbotron">';
-            me.html += '<p>There is no defined phase. Click the button to create a new one!</p>';
-            me.html += '<p><a class="btn btn-success btn-lg" href="#" data-page="phase-create"><i class="fa fa-plus"></i> Create New Phase</a></p>';
-            me.html += '</div>';
-        } else {
-            me.html += '<div class="create-phase-button"><a class="btn btn-success btn-sm" href="#" data-page="phase-create"><i class="fa fa-plus"></i> Create New Phase</a></div>';
-            me.html += '<table class="table table-bordered table-striped table-hover">';
-            me.html += '<thead>';
-            me.html += '    <tr>';
-            me.html += '        <th width="5%">Id</th>';
-            me.html += '        <th width="85%">Title</th>';
-            me.html += '        <th width="10%" class="text-center">Actions</th>';
-            me.html += '    </tr>';
-            me.html += '</thead>';
-            me.html += '<tbody>';
-            for (var i = 0; i < me.phaseModel.phases.length; i++) {
-                me.html += '    <tr>';
-                me.html += '        <td>#' + me.phaseModel.phases[i].phaseId + '</td>';
-                me.html += '        <td>' + me.phaseModel.phases[i].name + '</td>';
-                me.html += '        <td class="text-center">';
-                me.html += '            <a href="#" class="btn btn-danger btn-xs" data-page="phase-delete" data-phase-id="' + me.phaseModel.phases[i].phaseId + '"><i class="fa fa-minus-square"></i></a>';
-                me.html += '            <a href="#" class="btn btn-success btn-xs" data-page="phase-edit" data-phase-id="' + me.phaseModel.phases[i].phaseId + '"><i class="fa fa-edit"></i></a>';
-                me.html += '        </td>';
-                me.html += '    </tr>';
-            }
-            me.html += '</tbody>';
-            me.html += '</table>';
-        }
-
-        me.clear();
-        me.page.html(me.html);
-    };
-
     me.form = function () {
         me.html += '<form id="phase-form">';
         me.html += '    <div class="form-group">';
@@ -132,22 +95,6 @@ View.Phase = function () {
         input.plannedCompletionDate.val(phase.plannedCompletionDate.toJSON().slice(0, 10));
     };
 
-    me.renderCreate = function () {
-        me.html = '';
-        me.html += '<h1 class="main-title">Phase Create</h1>';
-        me.form();
-
-        me.clear();
-        me.page.html(me.html);
-
-        $("[name=phaseId]").change(function () {
-            var phaseId = parseInt($(this).val());
-            if (me.phaseModel.getIndex(phaseId) !== false) {
-                bootbox.alert('There is already a defined phase in the system with this phase id #' + String(phaseId) + '. ');
-                $("[name=phaseId]").val('');
-            }
-        });
-    };
 
     return me;
 

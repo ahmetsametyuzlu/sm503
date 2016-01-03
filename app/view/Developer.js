@@ -114,7 +114,7 @@ View.Developer = function () {
         me.clear();
         me.page.html(me.html);
 
-        var newDeveloperId = me.model.developerListList.getNewId();
+        var newDeveloperId = me.model.developerList.getNewId();
         $("[name=developerId]").val(newDeveloperId);
 
         $("[name=developerId]").change(function () {

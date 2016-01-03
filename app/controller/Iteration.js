@@ -27,10 +27,6 @@ Controller.Iteration = function () {
     };
 
     me.addListeners = function () {
-        // Iteration List
-        $(document).on('click', 'a[data-page="iteration-list"]', function (e) {
-            me.view.iteration.renderList();
-        });
 
         // Iteration Create
         $(document).on('click', 'a[data-page="iteration-create"]', function (e) {

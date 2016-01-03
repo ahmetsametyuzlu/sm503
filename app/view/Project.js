@@ -211,11 +211,13 @@ View.Project = function () {
 
             me.html += '    <div class="col-sm-3">';
             me.html += '        <div class="panel panel-default">';
-            me.html += '            <div class="panel-heading clearfix">';
-            me.html += '                <h4 class="panel-title pull-left">' + phase.name + '</h4>';
-            me.html += '                <div class="btn-group btn-group-xs pull-right">';
-            me.html += '                    <a href="#" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></a>';
-            me.html += '                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-plus"></i></a>';
+            me.html += '            <div class="panel-heading">';
+            me.html += '                <div class="clearfix">';
+            me.html += '                    <h4 class="panel-title pull-left">' + phase.name + '</h4>';
+            me.html += '                    <div class="btn-group btn-group-xs pull-right">';
+            me.html += '                        <a href="#" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Edit Phase"><i class="fa fa-edit"></i></a>';
+            me.html += '                        <a href="#" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="Add New Iteration"><i class="fa fa-plus"></i></a>';
+            me.html += '                    </div>';
             me.html += '                </div>';
             me.html += '            </div>';
             me.html += '            <div class="panel-body">';
@@ -226,8 +228,13 @@ View.Project = function () {
 
                 me.html += '                <div class="media">';
                 me.html += '                    <div class="media-body">';
-                me.html += '                        <h4 class="media-heading">' + iteration.name + '</h4>';
-                //me.html += '                        <p>' + iteration.description + '</p>';
+                me.html += '                        <div class="clearfix">';
+                me.html += '                            <h4 class="media-heading pull-left">' + iteration.name + '</h4>';
+                me.html += '                            <div class="btn-group btn-group-xs pull-right">';
+                me.html += '                                <a href="#" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Edit Iteration"><i class="fa fa-edit"></i></a>';
+                me.html += '                                <a href="#" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Delete Iteration"><i class="fa fa-minus-square"></i></a>';
+                me.html += '                            </div>';
+                me.html += '                        </div>';
                 me.html += '                    </div>';
                 me.html += '                </div>';
                 me.html += '                <hr>';
@@ -236,10 +243,14 @@ View.Project = function () {
             me.html += '            </div>';
             me.html += '        </div>';
             me.html += '    </div>';
+
         }
         me.html += '</div>';
         me.clear();
         me.page.html(me.html);
+
+        $('[data-toggle="tooltip"]').tooltip();
+
     };
 
     return me;

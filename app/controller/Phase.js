@@ -27,15 +27,6 @@ Controller.Phase = function () {
     };
 
     me.addListeners = function () {
-        // Phase List
-        $(document).on('click', 'a[data-page="phase-list"]', function (e) {
-            me.view.phase.renderList();
-        });
-
-        // Phase Create
-        $(document).on('click', 'a[data-page="phase-create"]', function (e) {
-            me.view.phase.renderCreate();
-        });
 
         // Phase Edit
         $(document).on('click', 'a[data-page="phase-edit"]', function (e) {
@@ -64,16 +55,6 @@ Controller.Phase = function () {
             me.view.phase.renderList();
         });
 
-        // Phase Delete
-        $(document).on('click', 'a[data-page="phase-delete"]', function (e) {
-            var phaseId = parseInt($(this).data('phase-id'));
-            bootbox.confirm('Are you sure to delete this phase with all related data?', function (d) {
-                if (d) {
-                    me.model.phase.delete(phaseId);
-                    me.view.phase.renderList();
-                }
-            });
-        });
     };
 
     return me;

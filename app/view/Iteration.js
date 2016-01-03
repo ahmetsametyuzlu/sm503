@@ -14,43 +14,6 @@ View.Iteration = function () {
 
     };
 
-    me.renderList = function () {
-        me.html = '';
-        me.html += '<h1 class="main-title">Iterations</h1>';
-        if (me.iterationModel.iterations.length == 0) {
-            me.html += '<div class="jumbotron">';
-            me.html += '<p>There is no defined iteration. Click the button to create a new one!</p>';
-            me.html += '<p><a class="btn btn-success btn-lg" href="#" data-page="iteration-create"><i class="fa fa-plus"></i> Create New Iteration</a></p>';
-            me.html += '</div>';
-        } else {
-            me.html += '<div class="create-iteration-button"><a class="btn btn-success btn-sm" href="#" data-page="iteration-create"><i class="fa fa-plus"></i> Create New Iteration</a></div>';
-            me.html += '<table class="table table-bordered table-striped table-hover">';
-            me.html += '<thead>';
-            me.html += '    <tr>';
-            me.html += '        <th width="5%">Id</th>';
-            me.html += '        <th width="85%">Title</th>';
-            me.html += '        <th width="10%" class="text-center">Actions</th>';
-            me.html += '    </tr>';
-            me.html += '</thead>';
-            me.html += '<tbody>';
-            for (var i = 0; i < me.iterationModel.iterations.length; i++) {
-                me.html += '    <tr>';
-                me.html += '        <td>#' + me.iterationModel.iterations[i].iterationId + '</td>';
-                me.html += '        <td>' + me.iterationModel.iterations[i].name + '</td>';
-                me.html += '        <td class="text-center">';
-                me.html += '            <a href="#" class="btn btn-danger btn-xs" data-page="iteration-delete" data-iteration-id="' + me.iterationModel.iterations[i].iterationId + '"><i class="fa fa-minus-square"></i></a>';
-                me.html += '            <a href="#" class="btn btn-success btn-xs" data-page="iteration-edit" data-iteration-id="' + me.iterationModel.iterations[i].iterationId + '"><i class="fa fa-edit"></i></a>';
-                me.html += '        </td>';
-                me.html += '    </tr>';
-            }
-            me.html += '</tbody>';
-            me.html += '</table>';
-        }
-
-        me.clear();
-        me.page.html(me.html);
-    };
-
     me.form = function () {
         me.html += '<form id="iteration-form">';
         me.html += '    <div class="form-group">';

@@ -92,9 +92,11 @@ Controller.Project = function () {
                     return false;
                 }
             }
-            me.model.projectList.save(dataObj);
 
-            if (disabled.find('[name="projectId"]').length == 0) {
+            if (me.model.projectList.getIndex(dataObj.projectId) !== false) {
+                me.model.projectList.update(dataObj.projectId, dataObj);
+            } else {
+                me.model.projectList.create(dataObj);
                 me.model.phaseList.generateForProject(dataObj.projectId);
                 me.model.iterationList.generateForPhases(me.model.phaseList.getListByProjectId(dataObj.projectId));
             }

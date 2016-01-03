@@ -44,6 +44,16 @@ Model.DeveloperList = (function () {
             return me.developers[me.getIndex(developerId)];
         };
 
+        me.getNewId = function () {
+            var maxId = 0;
+            for (var i = 0; i < me.developers.length; i++) {
+                if (me.developers[i].developerId > maxId) {
+                    maxId = me.developers[i].developerId;
+                }
+            }
+            return maxId + 1;
+        };
+
         me.getIndex = function (developerId) {
             for (var i = 0; i < me.developers.length; i++) {
                 if (me.developers[i].developerId == developerId) {

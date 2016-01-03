@@ -17,35 +17,36 @@ View.WorkItem = function () {
     me.renderList = function () {
         me.html = '';
         me.html += '<h1 class="main-title">Work Items</h1>';
-        if (me.model.workItem.workItems.length == 0) {
-            me.html += '<div class="jumbotron">';
-            me.html += '<p>There is no defined work items. Click the button to create a new one!</p>';
-            me.html += '<p><a class="btn btn-success btn-lg" href="#" data-page="workItem-create"><i class="fa fa-plus"></i> Create New Work Item</a></p>';
-            me.html += '</div>';
-        } else {
-            me.html += '<div class="create-workItem-button"><a class="btn btn-success btn-sm" href="#" data-page="workItem-create"><i class="fa fa-plus"></i> Create New WorkItem</a></div>';
-            me.html += '<table class="table table-bordered table-striped table-hover">';
-            me.html += '<thead>';
-            me.html += '    <tr>';
-            me.html += '        <th width="5%">Id</th>';
-            me.html += '        <th width="85%">Title</th>';
-            me.html += '        <th width="10%" class="text-center">Actions</th>';
-            me.html += '    </tr>';
-            me.html += '</thead>';
-            me.html += '<tbody>';
-            for (var i = 0; i < me.model.workItem.workItems.length; i++) {
-                me.html += '    <tr>';
-                me.html += '        <td>#' + me.model.workItem.workItems[i].workItemId + '</td>';
-                me.html += '        <td>' + me.model.workItem.workItems[i].name + '</td>';
-                me.html += '        <td class="text-center">';
-                me.html += '            <a href="#" class="btn btn-danger btn-xs" data-page="workItem-delete" data-workItem-id="' + me.model.workItem.workItems[i].workItemId + '"><i class="fa fa-minus-square"></i></a>';
-                me.html += '            <a href="#" class="btn btn-success btn-xs" data-page="workItem-edit" data-workItem-id="' + me.model.workItem.workItems[i].workItemId + '"><i class="fa fa-edit"></i></a>';
-                me.html += '        </td>';
-                me.html += '    </tr>';
-            }
-            me.html += '</tbody>';
-            me.html += '</table>';
-        }
+        me.html += '<p>Under construction. </p>';
+        //if (me.model.workItem.workItems.length == 0) {
+        //    me.html += '<div class="jumbotron">';
+        //    me.html += '<p>There is no defined work items. Click the button to create a new one!</p>';
+        //    me.html += '<p><a class="btn btn-success btn-lg" href="#" data-page="workItem-create"><i class="fa fa-plus"></i> Create New Work Item</a></p>';
+        //    me.html += '</div>';
+        //} else {
+        //    me.html += '<div class="create-workItem-button"><a class="btn btn-success btn-sm" href="#" data-page="workItem-create"><i class="fa fa-plus"></i> Create New WorkItem</a></div>';
+        //    me.html += '<table class="table table-bordered table-striped table-hover">';
+        //    me.html += '<thead>';
+        //    me.html += '    <tr>';
+        //    me.html += '        <th width="5%">Id</th>';
+        //    me.html += '        <th width="85%">Title</th>';
+        //    me.html += '        <th width="10%" class="text-center">Actions</th>';
+        //    me.html += '    </tr>';
+        //    me.html += '</thead>';
+        //    me.html += '<tbody>';
+        //    for (var i = 0; i < me.model.workItem.workItems.length; i++) {
+        //        me.html += '    <tr>';
+        //        me.html += '        <td>#' + me.model.workItem.workItems[i].workItemId + '</td>';
+        //        me.html += '        <td>' + me.model.workItem.workItems[i].name + '</td>';
+        //        me.html += '        <td class="text-center">';
+        //        me.html += '            <a href="#" class="btn btn-danger btn-xs" data-page="workItem-delete" data-workItem-id="' + me.model.workItem.workItems[i].workItemId + '"><i class="fa fa-minus-square"></i></a>';
+        //        me.html += '            <a href="#" class="btn btn-success btn-xs" data-page="workItem-edit" data-workItem-id="' + me.model.workItem.workItems[i].workItemId + '"><i class="fa fa-edit"></i></a>';
+        //        me.html += '        </td>';
+        //        me.html += '    </tr>';
+        //    }
+        //    me.html += '</tbody>';
+        //    me.html += '</table>';
+        //}
 
         me.clear();
         me.page.html(me.html);
