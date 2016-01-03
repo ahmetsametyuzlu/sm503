@@ -44,6 +44,16 @@ Model.ProjectList = (function () {
             return me.projects[me.getIndex(projectId)];
         };
 
+        me.getNewId = function () {
+            var maxId = 0;
+            for (var i = 0; i < me.projects.length; i++) {
+                if (me.projects[i].projectId > maxId) {
+                    maxId = me.projects[i].projectId;
+                }
+            }
+            return maxId + 1;
+        };
+
         me.getIndex = function (projectId) {
             for (var i = 0; i < me.projects.length; i++) {
                 if (me.projects[i].projectId == projectId) {
@@ -52,6 +62,11 @@ Model.ProjectList = (function () {
             }
             return false;
         };
+
+        me.getList = function () {
+            return me.projects;
+        };
+
     };
 
     var instance;

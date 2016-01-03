@@ -94,6 +94,11 @@ Controller.Project = function () {
             }
             me.model.projectList.save(dataObj);
 
+            if (disabled.find('[name="projectId"]').length == 0) {
+                me.model.phaseList.generateForProject(dataObj.projectId);
+                me.model.iterationList.generateForPhases(me.model.phaseList.getListByProjectId(dataObj.projectId));
+            }
+
             me.view.project.renderList();
         });
 

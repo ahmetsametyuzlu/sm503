@@ -20,7 +20,7 @@ Model.IterationList = (function () {
         me.create = function (iterationData) {
             var iteration = new Model.Iteration();
             iteration.setData(iterationData);
-            me.iterations.unshift(iteration);
+            me.iterations.push(iteration);
         };
 
         me.update = function (iterationId, iterationData) {
@@ -53,14 +53,43 @@ Model.IterationList = (function () {
             return false;
         };
 
-        me.getList = function () {
-            return me.phases;
+        me.getNewId = function () {
+            var maxId = 0;
+            for (var i = 0; i < me.iterations.length; i++) {
+                if (me.iterations[i].iterationId > maxId) {
+                    maxId = me.iterations[i].iterationId;
+                }
+            }
+            return maxId + 1;
         };
 
-        me.getListByPhaseId = function (projectId) {
-            return _.filter(me.phases, function (phase) {
-                return phase.targetProjectId == projectId;
+        me.getList = function () {
+            return me.iterations;
+        };
+
+        me.getListByPhaseId = function (phaseId) {
+            return _.filter(me.iterations, function (iteration) {
+                return iteration.targetPhaseId == phaseId;
             });
+        };
+
+        me.generateForPhases = function (phases) {
+            var iterationCount = {
+                1: 1,
+                2: 3,
+                3: 6,
+                4: 1
+            };
+            for (var phaseIndex in phases) {
+                var phase = phases[phaseIndex];
+                for (var i = 0; i < iterationCount[phase.type]; i++) {
+                    me.create({
+                        name: 'Iteration ' + String(i + 1),
+                        description: '',
+                        targetPhaseId: phase.phaseId
+                    });
+                }
+            }
         };
 
     };

@@ -12,8 +12,6 @@ Model.Phase.Abstract = function () {
     me.setData = function (data) {
         me.phaseId = parseInt(data.phaseId);
         me.targetProjectId = parseInt(data.targetProjectId);
-        me.name = data.name;
-        me.description = data.description;
         me.plannedStartDate = new Date(data.plannedStartDate);
         me.plannedCompletionDate = new Date(data.plannedCompletionDate);
     };

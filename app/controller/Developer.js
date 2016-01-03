@@ -6,17 +6,17 @@ Controller.Developer = function () {
 
     me.view.developer = null;
 
-    me.model.developer = null;
+    me.model.developerList = null;
     me.model.projectList = null;
 
     me.setDeveloperView = function (developerView) {
         me.view.developer = developerView;
-        me.view.developer.setDeveloperModel(me.model.developer);
+        me.view.developer.setDeveloperModel(me.model.developerList);
         me.view.developer.setProjectListModel(me.model.projectList);
     };
 
     me.setDeveloperModel = function (developerModel) {
-        me.model.developer = developerModel;
+        me.model.developerList = developerModel;
     };
 
     me.setProjectListModel = function (projectListModel) {
@@ -75,7 +75,7 @@ Controller.Developer = function () {
                     return false;
                 }
             }
-            me.model.developer.save(dataObj);
+            me.model.developerList.save(dataObj);
             me.view.developer.renderList();
         });
 
@@ -85,7 +85,7 @@ Controller.Developer = function () {
             var developerId = parseInt($(this).data('developer-id'));
             bootbox.confirm('Are you sure to delete this developer with all related data?', function (d) {
                 if (d) {
-                    me.model.developer.delete(developerId);
+                    me.model.developerList.delete(developerId);
                     me.view.developer.renderList();
                 }
             });

@@ -189,6 +189,9 @@ View.Project = function () {
         me.clear();
         me.page.html(me.html);
 
+        var newProjectId = me.model.projectList.getNewId();
+        $("[name=projectId]").val(newProjectId);
+
         $("[name=projectId]").change(function () {
             var projectId = parseInt($(this).val());
             if (me.model.projectList.getIndex(projectId) !== false) {
@@ -201,17 +204,40 @@ View.Project = function () {
     me.renderPlan = function (projectId) {
         me.html = '';
         me.html += '<h1 class="main-title">Project Plan #' + String(projectId) + '</h1>';
-        for (var phase in me.phaseModel.getListByProjectId(projectId)) {
-            me.html += '<div class="panel panel-primary">';
-            me.html += '    <div class="panel-heading">' + phase.name + '</div>';
-            me.html += '    <div class="panel-body">';
+        me.html += '<div class="row">';
+        var phases = me.model.phaseList.getListByProjectId(projectId);
+        for (var phaseIndex in phases) {
+            var phase = phases[phaseIndex];
 
-            for (var iteration in me.iterationModel.getListByPhaseId(phase.phaseId)) {
+            me.html += '    <div class="col-sm-3">';
+            me.html += '        <div class="panel panel-default">';
+            me.html += '            <div class="panel-heading clearfix">';
+            me.html += '                <h4 class="panel-title pull-left">' + phase.name + '</h4>';
+            me.html += '                <div class="btn-group btn-group-xs pull-right">';
+            me.html += '                    <a href="#" class="btn btn-success btn-xs"><i class="fa fa-edit"></i></a>';
+            me.html += '                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-plus"></i></a>';
+            me.html += '                </div>';
+            me.html += '            </div>';
+            me.html += '            <div class="panel-body">';
+
+            var iterations = me.model.iterationList.getListByPhaseId(phase.phaseId);
+            for (var iterationIndex in iterations) {
+                var iteration = iterations[iterationIndex];
+
+                me.html += '                <div class="media">';
+                me.html += '                    <div class="media-body">';
+                me.html += '                        <h4 class="media-heading">' + iteration.name + '</h4>';
+                //me.html += '                        <p>' + iteration.description + '</p>';
+                me.html += '                    </div>';
+                me.html += '                </div>';
+                me.html += '                <hr>';
             }
 
+            me.html += '            </div>';
+            me.html += '        </div>';
             me.html += '    </div>';
-            me.html += '</div>';
         }
+        me.html += '</div>';
         me.clear();
         me.page.html(me.html);
     };

@@ -54,6 +54,27 @@ Model.WorkItemList = (function () {
             }
             return false;
         };
+
+        me.getNewId = function () {
+            var maxId = 0;
+            for (var i = 0; i < me.workItems.length; i++) {
+                if (me.workItems[i].workItemId > maxId) {
+                    maxId = me.workItems[i].workItemId;
+                }
+            }
+            return maxId + 1;
+        };
+
+        me.getList = function () {
+            return me.workItems;
+        };
+
+        me.getListByIterationId = function (iterationId) {
+            return _.filter(me.workItems, function (workItem) {
+                return workItem.targetIterationId == iterationId;
+            });
+        };
+
     };
 
     var instance;

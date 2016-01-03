@@ -4,11 +4,11 @@ View.Developer = function () {
 
     var me = new View.Abstract();
 
-    me.model.developer = null;
+    me.model.developerList = null;
     me.model.projectList = null;
 
     me.setDeveloperModel = function (developerModel) {
-        me.model.developer = developerModel;
+        me.model.developerList = developerModel;
     };
 
     me.setProjectListModel = function (projectListModel) {
@@ -22,7 +22,7 @@ View.Developer = function () {
     me.renderList = function () {
         me.html = '';
         me.html += '<h1 class="main-title">Developers</h1>';
-        if (me.model.developer.developers.length == 0) {
+        if (me.model.developerList.developers.length == 0) {
             me.html += '<div class="jumbotron">';
             me.html += '<p>There is no defined developer. Click the button to create a new one!</p>';
             me.html += '<p><a class="btn btn-success btn-lg" href="#" data-page="developer-create"><i class="fa fa-plus"></i> Create New Developer</a></p>';
@@ -38,13 +38,13 @@ View.Developer = function () {
             me.html += '    </tr>';
             me.html += '</thead>';
             me.html += '<tbody>';
-            for (var i = 0; i < me.model.developer.developers.length; i++) {
+            for (var i = 0; i < me.model.developerList.developers.length; i++) {
                 me.html += '    <tr>';
-                me.html += '        <td>#' + me.model.developer.developers[i].developerId + '</td>';
-                me.html += '        <td>' + me.model.developer.developers[i].name + '<br>' + me.model.developer.developers[i].title + '</td>';
+                me.html += '        <td>#' + me.model.developerList.developers[i].developerId + '</td>';
+                me.html += '        <td>' + me.model.developerList.developers[i].name + '<br>' + me.model.developerList.developers[i].title + '</td>';
                 me.html += '        <td class="text-center">';
-                me.html += '            <a href="#" class="btn btn-danger btn-xs" data-page="developer-delete" data-developer-id="' + me.model.developer.developers[i].developerId + '"><i class="fa fa-minus-square"></i></a>';
-                me.html += '            <a href="#" class="btn btn-success btn-xs" data-page="developer-edit" data-developer-id="' + me.model.developer.developers[i].developerId + '"><i class="fa fa-edit"></i></a>';
+                me.html += '            <a href="#" class="btn btn-danger btn-xs" data-page="developer-delete" data-developer-id="' + me.model.developerList.developers[i].developerId + '"><i class="fa fa-minus-square"></i></a>';
+                me.html += '            <a href="#" class="btn btn-success btn-xs" data-page="developer-edit" data-developer-id="' + me.model.developerList.developers[i].developerId + '"><i class="fa fa-edit"></i></a>';
                 me.html += '        </td>';
                 me.html += '    </tr>';
             }
@@ -91,7 +91,7 @@ View.Developer = function () {
         me.clear();
         me.page.html(me.html);
 
-        var developer = me.model.developer.get(developerId);
+        var developer = me.model.developerList.get(developerId);
         var input = {
             developerId: $("[name=developerId]"),
             name: $("[name=name]"),
@@ -114,9 +114,12 @@ View.Developer = function () {
         me.clear();
         me.page.html(me.html);
 
+        var newDeveloperId = me.model.developerListList.getNewId();
+        $("[name=developerId]").val(newDeveloperId);
+
         $("[name=developerId]").change(function () {
             var developerId = parseInt($(this).val());
-            if (me.model.developer.getIndex(developerId) !== false) {
+            if (me.model.developerList.getIndex(developerId) !== false) {
                 bootbox.alert('There is already a defined developer in the system with this developer id #' + String(developerId) + '. ');
                 $("[name=developerId]").val('');
             }
