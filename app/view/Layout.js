@@ -51,7 +51,7 @@ View.Layout = function () {
             me.html += '                <li><a href="#" data-page="project-detail" data-project-id="' + String(projectId) + '"><i class="fa fa-info-circle"></i> Detail</a></li>';
             me.html += '                <li><a href="#" data-page="project-plan" data-project-id="' + String(projectId) + '"><i class="fa fa-briefcase"></i> Plan</a></li>';
             me.html += '                <li><a href="#" data-page="project-iteration" data-project-id="' + String(projectId) + '"><i class="fa fa-columns"></i> Iterations</a></li>';
-            me.html += '                <li><a href="#" data-page="project-work-package" data-project-id="' + String(projectId) + '"><i class="fa fa-sitemap"></i> Work Packages</a></li>';
+            me.html += '                <li><a href="#" data-page="project-work-item" data-project-id="' + String(projectId) + '"><i class="fa fa-sitemap"></i> Work Item</a></li>';
             me.html += '            </ul>';
             me.html += '            <ul class="nav navbar-nav navbar-right">';
             me.html += '                <li><a href="#" data-page="home"><i class="fa fa-home"></i> Home</a></li>';

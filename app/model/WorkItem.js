@@ -1,6 +1,6 @@
 'use strict';
 
-Model.Project = function () {
+Model.WorkItem = function () {
 
     var me = this;
 
