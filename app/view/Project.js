@@ -5,9 +5,24 @@ View.Project = function () {
     var me = new View.Abstract();
 
     me.model.projectList = null;
+    me.model.phaseList = null;
+    me.model.iterationList = null;
+    me.model.workItemList = null;
 
     me.setProjectListModel = function (projectListModel) {
         me.model.projectList = projectListModel;
+    };
+
+    me.setPhaseListModel = function (phaseListModel) {
+        me.model.phaseList = phaseListModel;
+    };
+
+    me.setIterationListModel = function (iterationListModel) {
+        me.model.iterationList = iterationListModel;
+    };
+
+    me.setWorkItemListModel = function (workItemListModel) {
+        me.model.workItemList = workItemListModel;
     };
 
     me.init = function () {
@@ -109,7 +124,7 @@ View.Project = function () {
 
     me.renderEdit = function (projectId) {
         me.html = '';
-        me.html += '<h1 class="main-title">Project Edit</h1>';
+        me.html += '<h1 class="main-title">Project Edit #' + String(projectId) + '</h1>';
         me.form();
 
         me.clear();
@@ -137,7 +152,7 @@ View.Project = function () {
 
     me.renderDetail = function (projectId) {
         me.html = '';
-        me.html += '<h1 class="main-title">Project Detail</h1>';
+        me.html += '<h1 class="main-title">Project Detail #' + String(projectId) + '</h1>';
         me.form();
 
         me.clear();
@@ -181,6 +196,24 @@ View.Project = function () {
                 $("[name=projectId]").val('');
             }
         });
+    };
+
+    me.renderPlan = function (projectId) {
+        me.html = '';
+        me.html += '<h1 class="main-title">Project Plan #' + String(projectId) + '</h1>';
+        for (var phase in me.phaseModel.getListByProjectId(projectId)) {
+            me.html += '<div class="panel panel-primary">';
+            me.html += '    <div class="panel-heading">' + phase.name + '</div>';
+            me.html += '    <div class="panel-body">';
+
+            for (var iteration in me.iterationModel.getListByPhaseId(phase.phaseId)) {
+            }
+
+            me.html += '    </div>';
+            me.html += '</div>';
+        }
+        me.clear();
+        me.page.html(me.html);
     };
 
     return me;

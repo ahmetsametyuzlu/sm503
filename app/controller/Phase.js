@@ -19,7 +19,7 @@ Controller.Phase = function () {
 
     me.init = function () {
         // Set model(s)
-        me.setPhaseModel(Model.Phase.getInstance());
+        me.setPhaseModel(Model.PhaseList.getInstance());
         // Set view
         me.setPhaseView(new View.Phase());
         // Add listeners

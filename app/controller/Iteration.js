@@ -19,7 +19,7 @@ Controller.Iteration = function () {
 
     me.init = function () {
         // Set model(s)
-        me.setIterationModel(Model.Iteration.getInstance());
+        me.setIterationModel(Model.IterationList.getInstance());
         // Set view
         me.setIterationView(new View.Iteration());
         // Add listeners

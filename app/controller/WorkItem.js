@@ -19,7 +19,7 @@ Controller.WorkItem = function () {
 
     me.init = function () {
         // Set model(s)
-        me.setWorkItemModel(Model.WorkItem.getInstance());
+        me.setWorkItemModel(Model.WorkItemList.getInstance());
         // Set view
         me.setWorkItemView(new View.WorkItem());
         // Add listeners

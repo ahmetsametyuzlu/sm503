@@ -53,6 +53,16 @@ Model.IterationList = (function () {
             return false;
         };
 
+        me.getList = function () {
+            return me.phases;
+        };
+
+        me.getListByPhaseId = function (projectId) {
+            return _.filter(me.phases, function (phase) {
+                return phase.targetProjectId == projectId;
+            });
+        };
+
     };
 
     var instance;

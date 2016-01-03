@@ -13,6 +13,7 @@ View.Home = function () {
         me.html += '<h1 class="main-title">Welcome</h1>';
         me.html += '<p>This software is created for SM503 project. </p>';
         me.html += '<p>Main url of the source code <a href="https://github.com/ahmetsametyuzlu/sm503" target="_blank">https://github.com/ahmetsametyuzlu/sm503</a></p>';
+        me.html += '<p class="alert alert-danger">All predefined project must be defined again. Phases will be added when creating projects <strong>by default</strong>. </p>';
         me.html += '<h4>Assumptions</h4>';
         me.html += '<ul>';
         me.html += '    <li>Namespaces will be defined in app/NameSpace.js file. They will be used as namespaces.</li>';

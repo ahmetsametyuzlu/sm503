@@ -7,19 +7,40 @@ Controller.Project = function () {
     me.view.project = null;
 
     me.model.projectList = null;
+    me.model.phaseList = null;
+    me.model.iterationList = null;
+    me.model.workItemList = null;
 
     me.setProjectView = function (projectView) {
+        projectView.setProjectListModel(me.model.projectList);
+        projectView.setPhaseListModel(me.model.phaseList);
+        projectView.setIterationListModel(me.model.iterationList);
+        projectView.setWorkItemListModel(me.model.workItemList);
         me.view.project = projectView;
-        me.view.project.setProjectListModel(me.model.projectList);
     };
 
     me.setProjectListModel = function (projectListModel) {
         me.model.projectList = projectListModel;
     };
 
+    me.setPhaseListModel = function (phaseListModel) {
+        me.model.phaseList = phaseListModel;
+    };
+
+    me.setIterationListModel = function (iterationListModel) {
+        me.model.iterationList = iterationListModel;
+    };
+
+    me.setWorkItemListModel = function (workItemListModel) {
+        me.model.workItemList = workItemListModel;
+    };
+
     me.init = function () {
         // Set model(s)
         me.setProjectListModel(Model.ProjectList.getInstance());
+        me.setPhaseListModel(Model.PhaseList.getInstance());
+        me.setIterationListModel(Model.IterationList.getInstance());
+        me.setWorkItemListModel(Model.WorkItemList.getInstance());
         // Set view
         me.setProjectView(new View.Project());
         // Add listeners
@@ -47,6 +68,12 @@ Controller.Project = function () {
         $(document).on('click', 'a[data-page="project-detail"]', function (e) {
             var projectId = parseInt($(this).data('project-id'));
             me.view.project.renderDetail(projectId);
+        });
+
+        // Project Plan
+        $(document).on('click', 'a[data-page="project-plan"]', function (e) {
+            var projectId = parseInt($(this).data('project-id'));
+            me.view.project.renderPlan(projectId);
         });
 
         // Project Form Submit

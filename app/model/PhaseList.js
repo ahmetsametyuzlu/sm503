@@ -6,6 +6,13 @@ Model.PhaseList = (function () {
 
         var me = this;
 
+        const phaseTypes = {
+            1: 'Inception',
+            2: 'Elaboration',
+            3: 'Construction',
+            4: 'Transition'
+        };
+
         me.phases = [];
 
         me.init = function () {
@@ -51,6 +58,16 @@ Model.PhaseList = (function () {
                 }
             }
             return false;
+        };
+
+        me.getList = function () {
+            return me.phases;
+        };
+
+        me.getListByProjectId = function (projectId) {
+            return _.filter(me.phases, function (phase) {
+                return phase.targetProjectId == projectId;
+            });
         };
 
     };
