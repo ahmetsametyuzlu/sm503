@@ -4,10 +4,10 @@ View.Iteration = function () {
 
     var me = new View.Abstract();
 
-    me.iterationModel = null;
+    me.model.iterationList = null;
 
-    me.setIterationModel = function (iterationModel) {
-        me.iterationModel = iterationModel;
+    me.setIterationListModel = function (iterationModel) {
+        me.model.iterationList = iterationModel;
     };
 
     me.init = function () {
@@ -24,32 +24,27 @@ View.Iteration = function () {
         me.html += '        </div>';
         me.html += '    </div>';
         me.html += '    <div class="form-group">';
+        me.html += '        <label>Target Phase Id</label>';
+        me.html += '        <div class="input-group">';
+        me.html += '            <span class="input-group-addon">#</span>';
+        me.html += '            <input name="targetPhaseId" type="number" class="form-control">';
+        me.html += '        </div>';
+        me.html += '    </div>';
+        me.html += '    <div class="form-group">';
         me.html += '        <label>Name</label>';
         me.html += '        <input name="name" type="text" class="form-control" required>';
         me.html += '    </div>';
         me.html += '    <div class="form-group">';
-        me.html += '        <label>Description</label>';
-        me.html += '        <textarea name="description" class="form-control" required rows="4"></textarea>';
+        me.html += '        <label>Objectives</label>';
+        me.html += '        <textarea name="objectives" class="form-control" required rows="4"></textarea>';
         me.html += '    </div>';
         me.html += '    <div class="form-group">';
-        me.html += '        <div class="row">';
-        me.html += '            <div class="col-sm-6">';
-        me.html += '                <label>Determined Budget</label>';
-        me.html += '                <div class="input-group">';
-        me.html += '                    <span class="input-group-addon">$</span>';
-        me.html += '                    <input name="determinedBudged" type="number" class="form-control">';
-        me.html += '                    <span class="input-group-addon">.00</span>';
-        me.html += '                </div>';
-        me.html += '            </div>';
-        me.html += '            <div class="col-sm-6">';
-        me.html += '                <label>Estimated Cost</label>';
-        me.html += '                <div class="input-group">';
-        me.html += '                    <span class="input-group-addon">$</span>';
-        me.html += '                    <input name="estimatedCost" type="number" class="form-control">';
-        me.html += '                    <span class="input-group-addon">.00</span>';
-        me.html += '                </div>';
-        me.html += '            </div>';
-        me.html += '        </div>';
+        me.html += '        <label>Evaluation Criteria</label>';
+        me.html += '        <textarea name="evaluationCriteria" class="form-control" required rows="4"></textarea>';
+        me.html += '    </div>';
+        me.html += '    <div class="form-group">';
+        me.html += '        <label>Status</label>';
+        me.html += '        <select name="status" class="form-control"><option>Planned</option><option>Not Planned</option><option>Completed</option><option>On-going</option></select>';
         me.html += '    </div>';
         me.html += '    <div class="form-group">';
         me.html += '        <div class="row">';
@@ -75,27 +70,30 @@ View.Iteration = function () {
         me.clear();
         me.page.html(me.html);
 
-        var iteration = me.iterationModel.get(iterationId);
+        var iteration = me.model.iterationList.get(iterationId);
         var input = {
             iterationId: $("[name=iterationId]"),
+            targetPhaseId: $("[name=targetPhaseId]"),
             name: $("[name=name]"),
-            description: $("[name=description]"),
-            determinedBudged: $("[name=determinedBudged]"),
-            estimatedCost: $("[name=estimatedCost]"),
+            objectives: $("[name=objectives]"),
+            evaluationCriteria: $("[name=evaluationCriteria]"),
+            status: $("[name=status]"),
             plannedStartDate: $("[name=plannedStartDate]"),
             plannedCompletionDate: $("[name=plannedCompletionDate]"),
         };
         input.iterationId.prop('disabled', true);
         input.iterationId.val(iteration.iterationId);
+        input.targetPhaseId.prop('disabled', true);
+        input.targetPhaseId.val(iteration.targetPhaseId);
         input.name.val(iteration.name);
-        input.description.val(iteration.description);
-        input.determinedBudged.val(iteration.determinedBudged);
-        input.estimatedCost.val(iteration.estimatedCost);
+        input.objectives.val(iteration.objectives);
+        input.evaluationCriteria.val(iteration.evaluationCriteria);
+        input.status.val(iteration.status);
         input.plannedStartDate.val(iteration.plannedStartDate.toJSON().slice(0, 10));
         input.plannedCompletionDate.val(iteration.plannedCompletionDate.toJSON().slice(0, 10));
     };
 
-    me.renderCreate = function () {
+    me.renderCreate = function (targetPhaseId) {
         me.html = '';
         me.html += '<h1 class="main-title">Iteration Create</h1>';
         me.form();
@@ -103,9 +101,17 @@ View.Iteration = function () {
         me.clear();
         me.page.html(me.html);
 
+        var input = {
+            iterationId: $("[name=iterationId]"),
+            targetPhaseId: $("[name=targetPhaseId]")
+        };
+        input.iterationId.val(me.model.iterationList.getNewId());
+        input.targetPhaseId.prop('disabled', true);
+        input.targetPhaseId.val(iteration.targetPhaseId);
+
         $("[name=iterationId]").change(function () {
             var iterationId = parseInt($(this).val());
-            if (me.iterationModel.getIndex(iterationId) !== false) {
+            if (me.model.iterationList.getIndex(iterationId) !== false) {
                 bootbox.alert('There is already a defined iteration in the system with this iteration id #' + String(iterationId) + '. ');
                 $("[name=iterationId]").val('');
             }

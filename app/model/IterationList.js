@@ -20,7 +20,7 @@ Model.IterationList = (function () {
         me.create = function (iterationData) {
             var iteration = new Model.Iteration();
             iteration.setData(iterationData);
-            me.iterations.push(iteration);
+            me.iterations.unshift(iteration);
         };
 
         me.update = function (iterationId, iterationData) {

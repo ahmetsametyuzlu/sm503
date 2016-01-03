@@ -6,15 +6,15 @@ Controller.Phase = function () {
 
     me.view.phase = null;
 
-    me.model.phase = null;
+    me.model.phaseList = null;
 
     me.setPhaseView = function (phaseView) {
         me.view.phase = phaseView;
-        me.view.phase.setPhaseModel(me.model.phase);
+        me.view.phase.setPhaseModel(me.model.phaseList);
     };
 
     me.setPhaseModel = function (phaseModel) {
-        me.model.phase = phaseModel;
+        me.model.phaseList = phaseModel;
     };
 
     me.init = function () {
@@ -50,9 +50,9 @@ Controller.Phase = function () {
                     return false;
                 }
             }
-            me.model.phase.save(dataObj);
+            me.model.phaseList.save(dataObj);
 
-            me.view.phase.renderList();
+            $('a[data-page="project-plan"]').click();
         });
 
     };

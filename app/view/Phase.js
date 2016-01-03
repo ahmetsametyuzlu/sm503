@@ -20,36 +20,23 @@ View.Phase = function () {
         me.html += '        <label>Phase Id</label>';
         me.html += '        <div class="input-group">';
         me.html += '            <span class="input-group-addon">#</span>';
-        me.html += '            <input name="phaseId" type="number" class="form-control">';
+        me.html += '            <input name="phaseId" type="number" disabled class="form-control">';
+        me.html += '        </div>';
+        me.html += '    </div>';
+        me.html += '    <div class="form-group">';
+        me.html += '        <label>Target Project Id</label>';
+        me.html += '        <div class="input-group">';
+        me.html += '            <span class="input-group-addon">#</span>';
+        me.html += '            <input name="targetProjectId" type="number" disabled class="form-control">';
         me.html += '        </div>';
         me.html += '    </div>';
         me.html += '    <div class="form-group">';
         me.html += '        <label>Name</label>';
-        me.html += '        <input name="name" type="text" class="form-control" required>';
+        me.html += '        <input name="name" type="text" disabled class="form-control" required>';
         me.html += '    </div>';
         me.html += '    <div class="form-group">';
         me.html += '        <label>Description</label>';
-        me.html += '        <textarea name="description" class="form-control" required rows="4"></textarea>';
-        me.html += '    </div>';
-        me.html += '    <div class="form-group">';
-        me.html += '        <div class="row">';
-        me.html += '            <div class="col-sm-6">';
-        me.html += '                <label>Determined Budget</label>';
-        me.html += '                <div class="input-group">';
-        me.html += '                    <span class="input-group-addon">$</span>';
-        me.html += '                    <input name="determinedBudged" type="number" class="form-control">';
-        me.html += '                    <span class="input-group-addon">.00</span>';
-        me.html += '                </div>';
-        me.html += '            </div>';
-        me.html += '            <div class="col-sm-6">';
-        me.html += '                <label>Estimated Cost</label>';
-        me.html += '                <div class="input-group">';
-        me.html += '                    <span class="input-group-addon">$</span>';
-        me.html += '                    <input name="estimatedCost" type="number" class="form-control">';
-        me.html += '                    <span class="input-group-addon">.00</span>';
-        me.html += '                </div>';
-        me.html += '            </div>';
-        me.html += '        </div>';
+        me.html += '        <textarea name="description" disabled class="form-control" required rows="4"></textarea>';
         me.html += '    </div>';
         me.html += '    <div class="form-group">';
         me.html += '        <div class="row">';
@@ -78,19 +65,16 @@ View.Phase = function () {
         var phase = me.phaseModel.get(phaseId);
         var input = {
             phaseId: $("[name=phaseId]"),
+            targetProjectId: $("[name=targetProjectId]"),
             name: $("[name=name]"),
             description: $("[name=description]"),
-            determinedBudged: $("[name=determinedBudged]"),
-            estimatedCost: $("[name=estimatedCost]"),
             plannedStartDate: $("[name=plannedStartDate]"),
             plannedCompletionDate: $("[name=plannedCompletionDate]"),
         };
-        input.phaseId.prop('disabled', true);
         input.phaseId.val(phase.phaseId);
+        input.targetProjectId.val(phase.targetProjectId);
         input.name.val(phase.name);
         input.description.val(phase.description);
-        input.determinedBudged.val(phase.determinedBudged);
-        input.estimatedCost.val(phase.estimatedCost);
         input.plannedStartDate.val(phase.plannedStartDate.toJSON().slice(0, 10));
         input.plannedCompletionDate.val(phase.plannedCompletionDate.toJSON().slice(0, 10));
     };

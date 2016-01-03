@@ -215,8 +215,8 @@ View.Project = function () {
             me.html += '                <div class="clearfix">';
             me.html += '                    <h4 class="panel-title pull-left">' + phase.name + '</h4>';
             me.html += '                    <div class="btn-group btn-group-xs pull-right">';
-            me.html += '                        <a href="#" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Edit Phase"><i class="fa fa-edit"></i></a>';
-            me.html += '                        <a href="#" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="Add New Iteration"><i class="fa fa-plus"></i></a>';
+            me.html += '                        <a href="#" data-page="phase-edit" data-phase-id="' + String(phase.phaseId) + '" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Edit Phase"><i class="fa fa-edit"></i></a>';
+            me.html += '                        <a href="#" data-page="iteration-create" data-phase-id="' + String(phase.phaseId) + '" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" title="Add Iteration"><i class="fa fa-plus"></i></a>';
             me.html += '                    </div>';
             me.html += '                </div>';
             me.html += '            </div>';
@@ -231,8 +231,8 @@ View.Project = function () {
                 me.html += '                        <div class="clearfix">';
                 me.html += '                            <h4 class="media-heading pull-left">' + iteration.name + '</h4>';
                 me.html += '                            <div class="btn-group btn-group-xs pull-right">';
-                me.html += '                                <a href="#" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Edit Iteration"><i class="fa fa-edit"></i></a>';
-                me.html += '                                <a href="#" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Delete Iteration"><i class="fa fa-minus-square"></i></a>';
+                me.html += '                                <a href="#" data-page="iteration-edit" data-iteration-id="' + String(iteration.iterationId) + '" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" title="Edit Iteration"><i class="fa fa-edit"></i></a>';
+                me.html += '                                <a href="#" data-page="iteration-delete" data-iteration-id="' + String(iteration.iterationId) + '" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Delete Iteration"><i class="fa fa-minus-square"></i></a>';
                 me.html += '                            </div>';
                 me.html += '                        </div>';
                 me.html += '                    </div>';

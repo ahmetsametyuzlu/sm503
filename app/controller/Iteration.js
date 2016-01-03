@@ -6,20 +6,20 @@ Controller.Iteration = function () {
 
     me.view.iteration = null;
 
-    me.model.iteration = null;
+    me.model.iterationList = null;
 
     me.setIterationView = function (iterationView) {
         me.view.iteration = iterationView;
-        me.view.iteration.setIterationModel(me.model.iteration);
+        me.view.iteration.setIterationListModel(me.model.iterationList);
     };
 
-    me.setIterationModel = function (iterationModel) {
-        me.model.iteration = iterationModel;
+    me.setIterationListModel = function (iterationModel) {
+        me.model.iterationList = iterationModel;
     };
 
     me.init = function () {
         // Set model(s)
-        me.setIterationModel(Model.IterationList.getInstance());
+        me.setIterationListModel(Model.IterationList.getInstance());
         // Set view
         me.setIterationView(new View.Iteration());
         // Add listeners
@@ -30,7 +30,8 @@ Controller.Iteration = function () {
 
         // Iteration Create
         $(document).on('click', 'a[data-page="iteration-create"]', function (e) {
-            me.view.iteration.renderCreate();
+            var phaseId = parseInt($(this).data('phase-id'));
+            me.view.iteration.renderCreate(phaseId);
         });
 
         // Iteration Edit
@@ -55,9 +56,9 @@ Controller.Iteration = function () {
                     return false;
                 }
             }
-            me.model.iteration.save(dataObj);
+            me.model.iterationList.save(dataObj);
 
-            me.view.iteration.renderList();
+            $('a[data-page="project-plan"]').click();
         });
 
         // Iteration Delete
@@ -65,8 +66,8 @@ Controller.Iteration = function () {
             var iterationId = parseInt($(this).data('iteration-id'));
             bootbox.confirm('Are you sure to delete this iteration with all related data?', function (d) {
                 if (d) {
-                    me.model.iteration.delete(iterationId);
-                    me.view.iteration.renderList();
+                    me.model.iterationList.delete(iterationId);
+                    $('a[data-page="project-plan"]').click();
                 }
             });
         });
