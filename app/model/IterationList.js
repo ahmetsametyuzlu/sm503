@@ -1,38 +1,70 @@
 'use strict';
 
-Model.IterationList = function () {
+Model.IterationList = (function () {
 
-    var me = this;
+    var Object = function () {
 
-    me.projectId = '';
-    me.name = '';
-    me.description = '';
-    me.determinedBudged = '';
-    me.estimatedCost = '';
-    me.plannedStartDate = '';
-    me.plannedCompletionDate = '';
+        var me = this;
 
-    me.setData = function (data) {
-        me.projectId = parseInt(data.projectId);
-        me.name = data.name;
-        me.description = data.description;
-        me.determinedBudged = parseInt(data.determinedBudged);
-        me.estimatedCost = parseInt(data.estimatedCost);
-        me.plannedStartDate = new Date(data.plannedStartDate);
-        me.plannedCompletionDate = new Date(data.plannedCompletionDate);
+        me.iterations = [];
+
+        me.init = function () {
+            var iterations = Data.get('iterations', []);
+            for (var i = 0; i < iterations.length; i++) {
+                var iteration = new Model.Iteration();
+                iteration.setData(iterations[i]);
+                me.iterations.push(iteration);
+            }
+        };
+
+        me.create = function (iterationData) {
+            var iteration = new Model.Iteration();
+            iteration.setData(iterationData);
+            me.iterations.unshift(iteration);
+        };
+
+        me.update = function (iterationId, iterationData) {
+            me.iterations[me.getIndex(iterationId)].setData(iterationData);
+        };
+
+        me.save = function (iterationData) {
+            var iterationId = parseInt(iterationData.iterationId);
+            if (me.getIndex(iterationId) !== false) {
+                me.update(iterationId, iterationData);
+            } else {
+                me.create(iterationData);
+            }
+        };
+
+        me.delete = function (iterationId) {
+            me.iterations.splice(me.getIndex(iterationId), 1);
+        };
+
+        me.get = function (iterationId) {
+            return me.iterations[me.getIndex(iterationId)];
+        };
+
+        me.getIndex = function (iterationId) {
+            for (var i = 0; i < me.iterations.length; i++) {
+                if (me.iterations[i].iterationId == iterationId) {
+                    return i;
+                }
+            }
+            return false;
+        };
+
     };
 
-    me.getData = function () {
-        var data = {};
-        data.projectId = me.projectId;
-        data.name = me.name;
-        data.description = me.description;
-        data.determinedBudged = me.determinedBudged;
-        data.estimatedCost = me.estimatedCost;
-        data.plannedStartDate = me.plannedStartDate.toString();
-        data.plannedCompletionDate = me.plannedCompletionDate.toString();
-        return data;
+    var instance;
+
+    return {
+        getInstance: function () {
+            if (!instance) {
+                instance = new Object();
+                instance.init()
+            }
+            return instance;
+        }
     };
 
-    return me;
-};
+})();

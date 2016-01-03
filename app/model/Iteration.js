@@ -4,31 +4,35 @@ Model.Iteration = function () {
 
     var me = this;
 
-    me.projectId = '';
-    me.name = '';
-    me.description = '';
-    me.determinedBudged = '';
-    me.estimatedCost = '';
-    me.plannedStartDate = '';
-    me.plannedCompletionDate = '';
+    me.iterationId = null;
+    me.targetPhaseId = null;
+    me.name = null;
+    me.objectives = null;
+    me.evaluationCriteria = null;
+    me.status = null;
+    me.plannedStartDate = null;
+    me.plannedCompletionDate = null;
 
     me.setData = function (data) {
-        me.projectId = parseInt(data.projectId);
+        me.iterationId = parseInt(data.iterationId);
+        me.targetPhaseId = parseInt(data.targetPhaseId);
         me.name = data.name;
-        me.description = data.description;
-        me.determinedBudged = parseInt(data.determinedBudged);
-        me.estimatedCost = parseInt(data.estimatedCost);
+        me.objectives = data.objectives;
+        me.evaluationCriteria = data.evaluationCriteria;
+        me.status = ['Planned', 'Not Planned', 'Completed', 'On-going'].indexOf(data.status) !== -1 ? data.status : null;
         me.plannedStartDate = new Date(data.plannedStartDate);
         me.plannedCompletionDate = new Date(data.plannedCompletionDate);
     };
 
     me.getData = function () {
         var data = {};
-        data.projectId = me.projectId;
+        data.iterationId = me.iterationId;
+        data.targetPhaseId = me.targetPhaseId;
         data.name = me.name;
-        data.description = me.description;
-        data.determinedBudged = me.determinedBudged;
-        data.estimatedCost = me.estimatedCost;
+        data.objectives = me.objectives;
+        data.evaluationCriteria = me.evaluationCriteria;
+        data.status = me.status;
+        data.targetIterationId = me.targetIterationId;
         data.plannedStartDate = me.plannedStartDate.toString();
         data.plannedCompletionDate = me.plannedCompletionDate.toString();
         return data;
@@ -36,3 +40,4 @@ Model.Iteration = function () {
 
     return me;
 };
+

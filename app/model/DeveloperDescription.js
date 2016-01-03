@@ -1,12 +1,12 @@
 'use strict';
 
-Model.DeveloperDescription = function () {
+Model.DeveloperListDescription = function () {
 
     var me = this;
 
-    me.developerId = '';
-    me.name = '';
-    me.title = '';
+    me.developerId = null;
+    me.name = null;
+    me.title = null;
     me.assignedProjectIds = [];
 
     me.setData = function (data) {

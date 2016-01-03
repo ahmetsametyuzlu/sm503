@@ -25,7 +25,7 @@ Controller.Developer = function () {
 
     me.init = function () {
         // Set model(s)
-        me.setDeveloperModel(Model.Developer.getInstance());
+        me.setDeveloperModel(Model.DeveloperList.getInstance());
         me.setProjectListModel(Model.ProjectList.getInstance());
         // Set view
         me.setDeveloperView(new View.Developer());

@@ -4,13 +4,13 @@ Model.Project = function () {
 
     var me = this;
 
-    me.projectId = '';
-    me.name = '';
-    me.description = '';
-    me.determinedBudged = '';
-    me.estimatedCost = '';
-    me.plannedStartDate = '';
-    me.plannedCompletionDate = '';
+    me.projectId = null;
+    me.name = null;
+    me.description = null;
+    me.determinedBudged = null;
+    me.estimatedCost = null;
+    me.plannedStartDate = null;
+    me.plannedCompletionDate = null;
 
     me.setData = function (data) {
         me.projectId = parseInt(data.projectId);
@@ -35,4 +35,5 @@ Model.Project = function () {
     };
 
     return me;
+
 };

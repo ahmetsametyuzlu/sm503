@@ -4,31 +4,34 @@ Model.WorkItem = function () {
 
     var me = this;
 
-    me.projectId = '';
-    me.name = '';
-    me.description = '';
-    me.determinedBudged = '';
-    me.estimatedCost = '';
-    me.plannedStartDate = '';
-    me.plannedCompletionDate = '';
+    me.workItemId = null;
+    me.name = null;
+    me.description = null;
+    me.completionStatus = null;
+    me.priority = null;
+    me.targetIterationId = null;
+    me.plannedStartDate = null;
+    me.plannedCompletionDate = null;
 
     me.setData = function (data) {
-        me.projectId = parseInt(data.projectId);
+        me.workItemId = parseInt(data.workItemId);
         me.name = data.name;
         me.description = data.description;
-        me.determinedBudged = parseInt(data.determinedBudged);
-        me.estimatedCost = parseInt(data.estimatedCost);
+        me.status = ['Planned', 'Not Planned', 'Completed', 'On-going'].indexOf(data.status) !== -1 ? data.status : null;
+        me.priority = parseInt(data.priority);
+        me.targetIterationId = parseInt(data.targetIterationId);
         me.plannedStartDate = new Date(data.plannedStartDate);
         me.plannedCompletionDate = new Date(data.plannedCompletionDate);
     };
 
     me.getData = function () {
         var data = {};
-        data.projectId = me.projectId;
+        data.workItemId = me.workItemId;
         data.name = me.name;
         data.description = me.description;
-        data.determinedBudged = me.determinedBudged;
-        data.estimatedCost = me.estimatedCost;
+        data.status = me.status;
+        data.priority = me.priority;
+        data.targetIterationId = me.targetIterationId;
         data.plannedStartDate = me.plannedStartDate.toString();
         data.plannedCompletionDate = me.plannedCompletionDate.toString();
         return data;

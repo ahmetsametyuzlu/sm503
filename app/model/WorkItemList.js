@@ -6,6 +6,8 @@ Model.WorkItemList = (function () {
 
         var me = this;
 
+        me.projectId = null;
+
         me.workItems = [];
 
         me.init = function () {

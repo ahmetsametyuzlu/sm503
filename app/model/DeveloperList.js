@@ -1,6 +1,6 @@
 'use strict';
 
-Model.Developer = (function () {
+Model.DeveloperList = (function () {
 
     var Object = function () {
 
@@ -11,14 +11,14 @@ Model.Developer = (function () {
         me.init = function () {
             var developers = Data.get('developers', []);
             for (var i = 0; i < developers.length; i++) {
-                var developer = new Model.DeveloperDescription();
+                var developer = new Model.DeveloperListDescription();
                 developer.setData(developers[i]);
                 me.developers.push(developer);
             }
         };
 
         me.create = function (developerData) {
-            var developer = new Model.DeveloperDescription();
+            var developer = new Model.DeveloperListDescription();
             developer.setData(developerData);
             me.developers.unshift(developer);
         };
