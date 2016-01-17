@@ -6,20 +6,20 @@ Controller.WorkItem = function () {
 
     me.view.workItem = null;
 
-    me.model.workItem = null;
+    me.model.workItemList = null;
 
     me.setWorkItemView = function (workItemView) {
         me.view.workItem = workItemView;
-        me.view.workItem.setWorkItemModel(me.model.workItem);
+        me.view.workItem.setWorkItemListModel(me.model.workItemList);
     };
 
-    me.setWorkItemModel = function (workItemModel) {
-        me.model.workItem = workItemModel;
+    me.setWorkItemListModel = function (workItemModel) {
+        me.model.workItemList = workItemModel;
     };
 
     me.init = function () {
         // Set model(s)
-        me.setWorkItemModel(Model.WorkItemList.getInstance());
+        me.setWorkItemListModel(Model.WorkItemList.getInstance());
         // Set view
         me.setWorkItemView(new View.WorkItem());
         // Add listeners
@@ -29,12 +29,14 @@ Controller.WorkItem = function () {
     me.addListeners = function () {
         // WorkItem List
         $(document).on('click', 'a[data-page="work-item-list"]', function (e) {
-            me.view.workItem.renderList();
+            var projectId = parseInt($(this).data('project-id'));
+            me.view.workItem.renderList(projectId);
         });
 
         // WorkItem Create
         $(document).on('click', 'a[data-page="work-item-create"]', function (e) {
-            me.view.workItem.renderCreate();
+            var projectId = parseInt($(this).data('project-id'));
+            me.view.workItem.renderCreate(projectId);
         });
 
         // WorkItem Edit
@@ -51,15 +53,24 @@ Controller.WorkItem = function () {
 
             var data = form.serializeArray();
             var dataObj = {};
+
             for (var i = 0; i < data.length; i++) {
-                dataObj[data[i].name] = data[i].value;
-                if (data[i].value == '') {
+                if (data[i].name == 'predecessorWorkItem') {
+                    if (!dataObj[data[i].name]) {
+                        dataObj[data[i].name] = [];
+                    }
+                    dataObj[data[i].name].push(data[i].value);
+                } else {
+                    dataObj[data[i].name] = data[i].value;
+                }
+                if (data[i].value == '' && data[i].name != 'plannedStartDate' && data[i].name != 'plannedCompletionDate') {
                     bootbox.alert('All the fields are required. Fill them! ');
                     disabled.prop('disabled', true);
                     return false;
                 }
             }
-            me.model.workItem.save(dataObj);
+
+            me.model.workItemList.save(dataObj);
 
             me.view.workItem.renderList();
         });
@@ -67,9 +78,9 @@ Controller.WorkItem = function () {
         // WorkItem Delete
         $(document).on('click', 'a[data-page="work-item-delete"]', function (e) {
             var workItemId = parseInt($(this).data('work-item-id'));
-            bootbox.confirm('Are you sure to delete this workItem with all related data?', function (d) {
+            bootbox.confirm('Are you sure to delete this work item with all related data?', function (d) {
                 if (d) {
-                    me.model.workItem.delete(workItemId);
+                    me.model.workItemList.delete(workItemId);
                     me.view.workItem.renderList();
                 }
             });

@@ -107,7 +107,7 @@ View.Iteration = function () {
         };
         input.iterationId.val(me.model.iterationList.getNewId());
         input.targetPhaseId.prop('disabled', true);
-        input.targetPhaseId.val(iteration.targetPhaseId);
+        input.targetPhaseId.val(targetPhaseId);
 
         $("[name=iterationId]").change(function () {
             var iterationId = parseInt($(this).val());

@@ -11,6 +11,11 @@ h1.main-title {
     margin: -64px 0 0 0;
 }
 
+.create-work-item-button {
+    float: right;
+    margin: -64px 0 0 0;
+}
+
 .create-developer-button {
     float: right;
     margin: -64px 0 0 0;

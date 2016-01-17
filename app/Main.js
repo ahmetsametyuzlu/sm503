@@ -5,7 +5,7 @@ var Main = function () {
     var me = this;
 
     me.init = function () {
-        // Data.clear();
+        //Data.clear();
 
         // Controllers
         new Controller.Home().init();

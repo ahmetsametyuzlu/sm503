@@ -3,7 +3,8 @@
 var Data = (function () {
 
     var Data = function () {
-        data: {}
+        data: {
+        }
     };
 
     var me = new Data();

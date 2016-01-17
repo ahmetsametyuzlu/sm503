@@ -20,7 +20,7 @@ Model.IterationList = (function () {
         me.create = function (iterationData) {
             var iteration = new Model.Iteration();
             iteration.setData(iterationData);
-            me.iterations.unshift(iteration);
+            me.iterations.push(iteration);
         };
 
         me.update = function (iterationId, iterationData) {
@@ -84,6 +84,7 @@ Model.IterationList = (function () {
                 var phase = phases[phaseIndex];
                 for (var i = 0; i < iterationCount[phase.type]; i++) {
                     me.create({
+                        iterationId: me.getNewId(),
                         name: 'Iteration ' + String(i + 1),
                         description: '',
                         targetPhaseId: phase.phaseId

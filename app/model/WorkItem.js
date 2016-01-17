@@ -7,9 +7,11 @@ Model.WorkItem = function () {
     me.workItemId = null;
     me.name = null;
     me.description = null;
-    me.completionStatus = null;
+    me.status = null;
     me.priority = null;
     me.targetIterationId = null;
+    me.predecessorWorkItem = null;
+    me.estimatedEffort = null;
     me.plannedStartDate = null;
     me.plannedCompletionDate = null;
 
@@ -18,8 +20,10 @@ Model.WorkItem = function () {
         me.name = data.name;
         me.description = data.description;
         me.status = ['Planned', 'Not Planned', 'Completed', 'On-going'].indexOf(data.status) !== -1 ? data.status : null;
-        me.priority = parseInt(data.priority);
+        me.priority = ['High', 'Middle', 'Low'].indexOf(data.priority) !== -1 ? data.priority : null;
         me.targetIterationId = parseInt(data.targetIterationId);
+        me.predecessorWorkItem = data.predecessorWorkItem;
+        me.estimatedEffort = data.estimatedEffort;
         me.plannedStartDate = new Date(data.plannedStartDate);
         me.plannedCompletionDate = new Date(data.plannedCompletionDate);
     };
@@ -32,6 +36,8 @@ Model.WorkItem = function () {
         data.status = me.status;
         data.priority = me.priority;
         data.targetIterationId = me.targetIterationId;
+        data.predecessorWorkItem = me.predecessorWorkItem;
+        data.estimatedEffort = me.estimatedEffort;
         data.plannedStartDate = me.plannedStartDate.toString();
         data.plannedCompletionDate = me.plannedCompletionDate.toString();
         return data;
