@@ -6,27 +6,27 @@ Controller.Iteration = function () {
 
     me.view.iteration = null;
 
-    me.model.iterationList = null;
+    me.model.iterationCatalog = null;
 
     me.setIterationView = function (iterationView) {
         me.view.iteration = iterationView;
-        me.view.iteration.setIterationListModel(me.model.iterationList);
+        me.view.iteration.setIterationCatalogModel(me.model.iterationCatalog);
     };
 
-    me.setIterationListModel = function (iterationModel) {
-        me.model.iterationList = iterationModel;
+    me.setIterationCatalogModel = function (iterationModel) {
+        me.model.iterationCatalog = iterationModel;
     };
 
     me.init = function () {
         // Set model(s)
-        me.setIterationListModel(Model.IterationList.getInstance());
+        me.setIterationCatalogModel(Model.IterationCatalog.getInstance());
         // Set view
         me.setIterationView(new View.Iteration());
         // Add listeners
-        me.addListeners();
+        me.addCatalogeners();
     };
 
-    me.addListeners = function () {
+    me.addCatalogeners = function () {
 
         // Iteration Create
         $(document).on('click', 'a[data-page="iteration-create"]', function (e) {
@@ -56,7 +56,7 @@ Controller.Iteration = function () {
                     return false;
                 }
             }
-            me.model.iterationList.save(dataObj);
+            me.model.iterationCatalog.save(dataObj);
 
             $('a[data-page="project-plan"]').click();
         });
@@ -66,7 +66,7 @@ Controller.Iteration = function () {
             var iterationId = parseInt($(this).data('iteration-id'));
             bootbox.confirm('Are you sure to delete this iteration with all related data?', function (d) {
                 if (d) {
-                    me.model.iterationList.delete(iterationId);
+                    me.model.iterationCatalog.delete(iterationId);
                     $('a[data-page="project-plan"]').click();
                 }
             });

@@ -21,10 +21,10 @@ Controller.Credit = function () {
         me.setCreditModel(Model.Credit.getInstance());
         // Set view
         me.setCreditView(new View.Credit());
-        me.addListeners();
+        me.addCatalogeners();
     };
 
-    me.addListeners = function () {
+    me.addCatalogeners = function () {
         $(document).on('click', 'a[data-page="credit"]', function (e) {
             me.view.credit.render();
         });

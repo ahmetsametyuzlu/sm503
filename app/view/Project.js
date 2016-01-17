@@ -4,35 +4,35 @@ View.Project = function () {
 
     var me = new View.Abstract();
 
-    me.model.projectList = null;
-    me.model.phaseList = null;
-    me.model.iterationList = null;
-    me.model.workItemList = null;
+    me.model.projectCatalog = null;
+    me.model.phaseCatalog = null;
+    me.model.iterationCatalog = null;
+    me.model.workItemCatalog = null;
 
-    me.setProjectListModel = function (projectListModel) {
-        me.model.projectList = projectListModel;
+    me.setProjectCatalogModel = function (projectCatalogModel) {
+        me.model.projectCatalog = projectCatalogModel;
     };
 
-    me.setPhaseListModel = function (phaseListModel) {
-        me.model.phaseList = phaseListModel;
+    me.setPhaseCatalogModel = function (phaseCatalogModel) {
+        me.model.phaseCatalog = phaseCatalogModel;
     };
 
-    me.setIterationListModel = function (iterationListModel) {
-        me.model.iterationList = iterationListModel;
+    me.setIterationCatalogModel = function (iterationCatalogModel) {
+        me.model.iterationCatalog = iterationCatalogModel;
     };
 
-    me.setWorkItemListModel = function (workItemListModel) {
-        me.model.workItemList = workItemListModel;
+    me.setWorkItemCatalogModel = function (workItemCatalogModel) {
+        me.model.workItemCatalog = workItemCatalogModel;
     };
 
     me.init = function () {
 
     };
 
-    me.renderList = function () {
+    me.renderCatalog = function () {
         me.html = '';
         me.html += '<h1 class="main-title">Projects</h1>';
-        if (me.model.projectList.projects.length == 0) {
+        if (me.model.projectCatalog.projects.length == 0) {
             me.html += '<div class="jumbotron">';
             me.html += '<p>There is no defined project. Click the button to create a new one!</p>';
             me.html += '<p><a class="btn btn-success btn-lg" href="#" data-page="project-create"><i class="fa fa-plus"></i> Create New Project</a></p>';
@@ -48,14 +48,14 @@ View.Project = function () {
             me.html += '    </tr>';
             me.html += '</thead>';
             me.html += '<tbody>';
-            for (var i = 0; i < me.model.projectList.projects.length; i++) {
+            for (var i = 0; i < me.model.projectCatalog.projects.length; i++) {
                 me.html += '    <tr>';
-                me.html += '        <td>#' + me.model.projectList.projects[i].projectId + '</td>';
-                me.html += '        <td>' + me.model.projectList.projects[i].name + '</td>';
+                me.html += '        <td>#' + me.model.projectCatalog.projects[i].projectId + '</td>';
+                me.html += '        <td>' + me.model.projectCatalog.projects[i].name + '</td>';
                 me.html += '        <td class="text-center">';
-                me.html += '            <a href="#" class="btn btn-danger btn-xs" data-page="project-delete" data-project-id="' + me.model.projectList.projects[i].projectId + '" data-toggle="tooltip" data-placement="top" title="Delete Project"><i class="fa fa-minus-square"></i></a>';
-                me.html += '            <a href="#" class="btn btn-success btn-xs" data-page="project-edit" data-project-id="' + me.model.projectList.projects[i].projectId + '" data-toggle="tooltip" data-placement="top" title="Edit Project"><i class="fa fa-edit"></i></a>';
-                me.html += '            <a href="#" class="btn btn-default btn-xs" data-page="project-detail" data-project-id="' + me.model.projectList.projects[i].projectId + '" data-toggle="tooltip" data-placement="top" title="Project Detail"><i class="fa fa-info-circle"></i></a>';
+                me.html += '            <a href="#" class="btn btn-danger btn-xs" data-page="project-delete" data-project-id="' + me.model.projectCatalog.projects[i].projectId + '" data-toggle="tooltip" data-placement="top" title="Delete Project"><i class="fa fa-minus-square"></i></a>';
+                me.html += '            <a href="#" class="btn btn-success btn-xs" data-page="project-edit" data-project-id="' + me.model.projectCatalog.projects[i].projectId + '" data-toggle="tooltip" data-placement="top" title="Edit Project"><i class="fa fa-edit"></i></a>';
+                me.html += '            <a href="#" class="btn btn-default btn-xs" data-page="project-detail" data-project-id="' + me.model.projectCatalog.projects[i].projectId + '" data-toggle="tooltip" data-placement="top" title="Project Detail"><i class="fa fa-info-circle"></i></a>';
                 me.html += '        </td>';
                 me.html += '    </tr>';
             }
@@ -130,7 +130,7 @@ View.Project = function () {
         me.clear();
         me.page.html(me.html);
 
-        var project = me.model.projectList.get(projectId);
+        var project = me.model.projectCatalog.get(projectId);
         var input = {
             projectId: $("[name=projectId]"),
             name: $("[name=name]"),
@@ -158,7 +158,7 @@ View.Project = function () {
         me.clear();
         me.page.html(me.html);
 
-        var project = me.model.projectList.get(projectId);
+        var project = me.model.projectCatalog.get(projectId);
         var input = {
             projectId: $("[name=projectId]"),
             name: $("[name=name]"),
@@ -189,12 +189,12 @@ View.Project = function () {
         me.clear();
         me.page.html(me.html);
 
-        var newProjectId = me.model.projectList.getNewId();
+        var newProjectId = me.model.projectCatalog.getNewId();
         $("[name=projectId]").val(newProjectId);
 
         $("[name=projectId]").change(function () {
             var projectId = parseInt($(this).val());
-            if (me.model.projectList.getIndex(projectId) !== false) {
+            if (me.model.projectCatalog.getIndex(projectId) !== false) {
                 bootbox.alert('There is already a defined project in the system with this project id #' + String(projectId) + '. ');
                 $("[name=projectId]").val('');
             }
@@ -205,7 +205,7 @@ View.Project = function () {
         me.html = '';
         me.html += '<h1 class="main-title">Project Plan #' + String(projectId) + '</h1>';
         me.html += '<div class="row">';
-        var phases = me.model.phaseList.getListByProjectId(projectId);
+        var phases = me.model.phaseCatalog.getCatalogByProjectId(projectId);
         for (var phaseIndex in phases) {
             var phase = phases[phaseIndex];
 
@@ -222,7 +222,7 @@ View.Project = function () {
             me.html += '            </div>';
             me.html += '            <div class="panel-body">';
 
-            var iterations = me.model.iterationList.getListByPhaseId(phase.phaseId);
+            var iterations = me.model.iterationCatalog.getCatalogByPhaseId(phase.phaseId);
             for (var iterationIndex in iterations) {
                 var iteration = iterations[iterationIndex];
 

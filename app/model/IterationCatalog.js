@@ -1,6 +1,6 @@
 'use strict';
 
-Model.IterationList = (function () {
+Model.IterationCatalog = (function () {
 
     var Object = function () {
 
@@ -63,11 +63,11 @@ Model.IterationList = (function () {
             return maxId + 1;
         };
 
-        me.getList = function () {
+        me.getCatalog = function () {
             return me.iterations;
         };
 
-        me.getListByPhaseId = function (phaseId) {
+        me.getCatalogByPhaseId = function (phaseId) {
             return _.filter(me.iterations, function (iteration) {
                 return iteration.targetPhaseId == phaseId;
             });

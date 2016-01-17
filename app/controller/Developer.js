@@ -6,38 +6,38 @@ Controller.Developer = function () {
 
     me.view.developer = null;
 
-    me.model.developerList = null;
-    me.model.projectList = null;
+    me.model.developerCatalog = null;
+    me.model.projectCatalog = null;
 
     me.setDeveloperView = function (developerView) {
         me.view.developer = developerView;
-        me.view.developer.setDeveloperModel(me.model.developerList);
-        me.view.developer.setProjectListModel(me.model.projectList);
+        me.view.developer.setDeveloperModel(me.model.developerCatalog);
+        me.view.developer.setProjectCatalogModel(me.model.projectCatalog);
     };
 
     me.setDeveloperModel = function (developerModel) {
-        me.model.developerList = developerModel;
+        me.model.developerCatalog = developerModel;
     };
 
-    me.setProjectListModel = function (projectListModel) {
-        me.model.projectList = projectListModel;
+    me.setProjectCatalogModel = function (projectCatalogModel) {
+        me.model.projectCatalog = projectCatalogModel;
     };
 
     me.init = function () {
         // Set model(s)
-        me.setDeveloperModel(Model.DeveloperList.getInstance());
-        me.setProjectListModel(Model.ProjectList.getInstance());
+        me.setDeveloperModel(Model.DeveloperCatalog.getInstance());
+        me.setProjectCatalogModel(Model.ProjectCatalog.getInstance());
         // Set view
         me.setDeveloperView(new View.Developer());
         // Add listeners
-        me.addListeners();
+        me.addCatalogeners();
     };
 
-    me.addListeners = function () {
+    me.addCatalogeners = function () {
 
-        // Developer List
+        // Developer Catalog
         $(document).on('click', 'a[data-page="developer-list"]', function (e) {
-            me.view.developer.renderList();
+            me.view.developer.renderCatalog();
         });
 
         // Developer Create
@@ -75,8 +75,8 @@ Controller.Developer = function () {
                     return false;
                 }
             }
-            me.model.developerList.save(dataObj);
-            me.view.developer.renderList();
+            me.model.developerCatalog.save(dataObj);
+            me.view.developer.renderCatalog();
         });
 
         // Developer Delete
@@ -85,8 +85,8 @@ Controller.Developer = function () {
             var developerId = parseInt($(this).data('developer-id'));
             bootbox.confirm('Are you sure to delete this developer with all related data?', function (d) {
                 if (d) {
-                    me.model.developerList.delete(developerId);
-                    me.view.developer.renderList();
+                    me.model.developerCatalog.delete(developerId);
+                    me.view.developer.renderCatalog();
                 }
             });
         });

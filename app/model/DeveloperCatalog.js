@@ -1,6 +1,6 @@
 'use strict';
 
-Model.DeveloperList = (function () {
+Model.DeveloperCatalog = (function () {
 
     var Object = function () {
 

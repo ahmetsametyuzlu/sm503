@@ -6,31 +6,31 @@ Controller.WorkItem = function () {
 
     me.view.workItem = null;
 
-    me.model.workItemList = null;
+    me.model.workItemCatalog = null;
 
     me.setWorkItemView = function (workItemView) {
         me.view.workItem = workItemView;
-        me.view.workItem.setWorkItemListModel(me.model.workItemList);
+        me.view.workItem.setWorkItemCatalogModel(me.model.workItemCatalog);
     };
 
-    me.setWorkItemListModel = function (workItemModel) {
-        me.model.workItemList = workItemModel;
+    me.setWorkItemCatalogModel = function (workItemModel) {
+        me.model.workItemCatalog = workItemModel;
     };
 
     me.init = function () {
         // Set model(s)
-        me.setWorkItemListModel(Model.WorkItemList.getInstance());
+        me.setWorkItemCatalogModel(Model.WorkItemCatalog.getInstance());
         // Set view
         me.setWorkItemView(new View.WorkItem());
         // Add listeners
-        me.addListeners();
+        me.addCatalogeners();
     };
 
-    me.addListeners = function () {
-        // WorkItem List
+    me.addCatalogeners = function () {
+        // WorkItem Catalog
         $(document).on('click', 'a[data-page="work-item-list"]', function (e) {
             var projectId = parseInt($(this).data('project-id'));
-            me.view.workItem.renderList(projectId);
+            me.view.workItem.renderCatalog(projectId);
         });
 
         // WorkItem Create
@@ -70,9 +70,9 @@ Controller.WorkItem = function () {
                 }
             }
 
-            me.model.workItemList.save(dataObj);
+            me.model.workItemCatalog.save(dataObj);
 
-            me.view.workItem.renderList();
+            me.view.workItem.renderCatalog();
         });
 
         // WorkItem Delete
@@ -80,8 +80,8 @@ Controller.WorkItem = function () {
             var workItemId = parseInt($(this).data('work-item-id'));
             bootbox.confirm('Are you sure to delete this work item with all related data?', function (d) {
                 if (d) {
-                    me.model.workItemList.delete(workItemId);
-                    me.view.workItem.renderList();
+                    me.model.workItemCatalog.delete(workItemId);
+                    me.view.workItem.renderCatalog();
                 }
             });
         });

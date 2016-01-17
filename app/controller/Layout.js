@@ -7,34 +7,34 @@ Controller.Layout = function () {
     me.view.layout = null;
 
     me.model.layout = null;
-    me.model.projectList = null;
+    me.model.projectCatalog = null;
 
     me.setLayoutView = function (layoutView) {
         me.view.layout = layoutView;
         me.view.layout.setLayoutModel(me.model.layout);
-        me.view.layout.setProjectListModel(me.model.projectList);
+        me.view.layout.setProjectCatalogModel(me.model.projectCatalog);
     };
 
     me.setLayoutModel = function (layoutModel) {
         me.model.layout = layoutModel;
     };
 
-    me.setProjectListModel = function (projectListModel) {
-        me.model.projectList = projectListModel;
+    me.setProjectCatalogModel = function (projectCatalogModel) {
+        me.model.projectCatalog = projectCatalogModel;
     };
 
     me.init = function () {
-        me.setProjectListModel(Model.ProjectList.getInstance());
+        me.setProjectCatalogModel(Model.ProjectCatalog.getInstance());
         me.setLayoutModel(Model.Layout.getInstance());
 
         me.setLayoutView(new View.Layout());
         // Add listeners
-        me.addListeners();
+        me.addCatalogeners();
         // Render layout by default
         me.view.layout.render();
     };
 
-    me.addListeners = function () {
+    me.addCatalogeners = function () {
         // When home clicked go into general mode
         $(document).on('click', 'a[data-page="home"]', function (e) {
             if (me.model.layout.activeProjectId !== null) {

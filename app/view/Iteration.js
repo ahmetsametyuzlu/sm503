@@ -4,10 +4,10 @@ View.Iteration = function () {
 
     var me = new View.Abstract();
 
-    me.model.iterationList = null;
+    me.model.iterationCatalog = null;
 
-    me.setIterationListModel = function (iterationModel) {
-        me.model.iterationList = iterationModel;
+    me.setIterationCatalogModel = function (iterationModel) {
+        me.model.iterationCatalog = iterationModel;
     };
 
     me.init = function () {
@@ -70,7 +70,7 @@ View.Iteration = function () {
         me.clear();
         me.page.html(me.html);
 
-        var iteration = me.model.iterationList.get(iterationId);
+        var iteration = me.model.iterationCatalog.get(iterationId);
         var input = {
             iterationId: $("[name=iterationId]"),
             targetPhaseId: $("[name=targetPhaseId]"),
@@ -105,13 +105,13 @@ View.Iteration = function () {
             iterationId: $("[name=iterationId]"),
             targetPhaseId: $("[name=targetPhaseId]")
         };
-        input.iterationId.val(me.model.iterationList.getNewId());
+        input.iterationId.val(me.model.iterationCatalog.getNewId());
         input.targetPhaseId.prop('disabled', true);
         input.targetPhaseId.val(targetPhaseId);
 
         $("[name=iterationId]").change(function () {
             var iterationId = parseInt($(this).val());
-            if (me.model.iterationList.getIndex(iterationId) !== false) {
+            if (me.model.iterationCatalog.getIndex(iterationId) !== false) {
                 bootbox.alert('There is already a defined iteration in the system with this iteration id #' + String(iterationId) + '. ');
                 $("[name=iterationId]").val('');
             }

@@ -30,11 +30,11 @@ var Main = function () {
 
     me.save = function () {
 
-        var projectModel = Model.ProjectList.getInstance();
-        var developerModel = Model.DeveloperList.getInstance();
-        var phaseModel = Model.PhaseList.getInstance();
-        var iterationModel = Model.IterationList.getInstance();
-        var workItemModel = Model.WorkItemList.getInstance();
+        var projectModel = Model.ProjectCatalog.getInstance();
+        var developerModel = Model.DeveloperCatalog.getInstance();
+        var phaseModel = Model.PhaseCatalog.getInstance();
+        var iterationModel = Model.IterationCatalog.getInstance();
+        var workItemModel = Model.WorkItemCatalog.getInstance();
 
         var projects = [];
         for (var i = 0; i < projectModel.projects.length; i++) {

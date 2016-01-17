@@ -4,20 +4,20 @@ View.WorkItem = function () {
 
     var me = new View.Abstract();
 
-    me.model.workItemList = null;
+    me.model.workItemCatalog = null;
 
-    me.setWorkItemListModel = function (workItemModel) {
-        me.model.workItemList = workItemModel;
+    me.setWorkItemCatalogModel = function (workItemModel) {
+        me.model.workItemCatalog = workItemModel;
     };
 
     me.init = function () {
 
     };
 
-    me.renderList = function () {
+    me.renderCatalog = function () {
         me.html = '';
         me.html += '<h1 class="main-title">Work Items</h1>';
-        if (me.model.workItemList.workItems.length == 0) {
+        if (me.model.workItemCatalog.workItems.length == 0) {
             me.html += '<div class="jumbotron">';
             me.html += '<p>There is no defined work items. Click the button to create a new one!</p>';
             me.html += '<p><a class="btn btn-success btn-lg" href="#" data-page="work-item-create"><i class="fa fa-plus"></i> Create New Work Item</a></p>';
@@ -33,13 +33,13 @@ View.WorkItem = function () {
             me.html += '    </tr>';
             me.html += '</thead>';
             me.html += '<tbody>';
-            for (var i = 0; i < me.model.workItemList.workItems.length; i++) {
+            for (var i = 0; i < me.model.workItemCatalog.workItems.length; i++) {
                 me.html += '    <tr>';
-                me.html += '        <td>#' + me.model.workItemList.workItems[i].workItemId + '</td>';
-                me.html += '        <td>' + me.model.workItemList.workItems[i].name + '</td>';
+                me.html += '        <td>#' + me.model.workItemCatalog.workItems[i].workItemId + '</td>';
+                me.html += '        <td>' + me.model.workItemCatalog.workItems[i].name + '</td>';
                 me.html += '        <td class="text-center">';
-                me.html += '            <a href="#" class="btn btn-danger btn-xs" data-page="work-item-delete" data-work-item-id="' + me.model.workItemList.workItems[i].workItemId + '"><i class="fa fa-minus-square"></i></a>';
-                me.html += '            <a href="#" class="btn btn-success btn-xs" data-page="work-item-edit" data-work-item-id="' + me.model.workItemList.workItems[i].workItemId + '"><i class="fa fa-edit"></i></a>';
+                me.html += '            <a href="#" class="btn btn-danger btn-xs" data-page="work-item-delete" data-work-item-id="' + me.model.workItemCatalog.workItems[i].workItemId + '"><i class="fa fa-minus-square"></i></a>';
+                me.html += '            <a href="#" class="btn btn-success btn-xs" data-page="work-item-edit" data-work-item-id="' + me.model.workItemCatalog.workItems[i].workItemId + '"><i class="fa fa-edit"></i></a>';
                 me.html += '        </td>';
                 me.html += '    </tr>';
             }
@@ -94,8 +94,8 @@ View.WorkItem = function () {
         me.html += '    </div>';
         me.html += '    <div class="form-group">';
         me.html += '        <label>Predecessor work item(s)</label>';
-        for (var i = 0; i < me.model.workItemList.workItems.length; i++) {
-            me.html += '    <div class="checkbox"><label><input type="checkbox" name="predecessorWorkItem" value="' + me.model.workItemList.workItems[i].workItemId + '"> ' + me.model.workItemList.workItems[i].name + '</label></div>';
+        for (var i = 0; i < me.model.workItemCatalog.workItems.length; i++) {
+            me.html += '    <div class="checkbox"><label><input type="checkbox" name="predecessorWorkItem" value="' + me.model.workItemCatalog.workItems[i].workItemId + '"> ' + me.model.workItemCatalog.workItems[i].name + '</label></div>';
         }
         me.html += '    </div>';
         me.html += '    <button type="button" data-form-action="work-item-submit" class="btn btn-success"><i class="fa fa-save"></i> Submit</button>';
@@ -110,7 +110,7 @@ View.WorkItem = function () {
         me.clear();
         me.page.html(me.html);
 
-        var workItem = me.model.workItemList.get(workItemId);
+        var workItem = me.model.workItemCatalog.get(workItemId);
         var input = {
             workItemId: $("[name=workItemId]"),
             name: $("[name=name]"),
@@ -133,8 +133,8 @@ View.WorkItem = function () {
         input.plannedStartDate.val(workItem.plannedStartDate.toJSON().slice(0, 10));
         input.plannedCompletionDate.val(workItem.plannedCompletionDate.toJSON().slice(0, 10));
 
-        for (var i = 0; i < me.workItemList.workItems.predecessorWorkItem.length; i++) {
-            $("[name=predecessorWorkItem][value=" + String(me.workItemList.workItems.predecessorWorkItem[i].workItemId) + "]").prop('checked', true);
+        for (var i = 0; i < me.workItemCatalog.workItems.predecessorWorkItem.length; i++) {
+            $("[name=predecessorWorkItem][value=" + String(me.workItemCatalog.workItems.predecessorWorkItem[i].workItemId) + "]").prop('checked', true);
         }
     };
 
@@ -148,7 +148,7 @@ View.WorkItem = function () {
 
         $("[name=workItemId]").change(function () {
             var workItemId = parseInt($(this).val());
-            if (me.model.workItemList.getIndex(workItemId) !== false) {
+            if (me.model.workItemCatalog.getIndex(workItemId) !== false) {
                 bootbox.alert('There is already a defined work item in the system with this work item id #' + String(workItemId) + '. ');
                 $("[name=workItemId]").val('');
             }

@@ -1,6 +1,6 @@
 'use strict';
 
-Model.ProjectList = (function () {
+Model.ProjectCatalog = (function () {
 
     var Object = function () {
 
@@ -63,7 +63,7 @@ Model.ProjectList = (function () {
             return false;
         };
 
-        me.getList = function () {
+        me.getCatalog = function () {
             return me.projects;
         };
 

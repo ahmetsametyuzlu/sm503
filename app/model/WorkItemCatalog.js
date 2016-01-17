@@ -1,6 +1,6 @@
 'use strict';
 
-Model.WorkItemList = (function () {
+Model.WorkItemCatalog = (function () {
 
     var Object = function () {
 
@@ -65,11 +65,11 @@ Model.WorkItemList = (function () {
             return maxId + 1;
         };
 
-        me.getList = function () {
+        me.getCatalog = function () {
             return me.workItems;
         };
 
-        me.getListByIterationId = function (iterationId) {
+        me.getCatalogByIterationId = function (iterationId) {
             return _.filter(me.workItems, function (workItem) {
                 return workItem.targetIterationId == iterationId;
             });

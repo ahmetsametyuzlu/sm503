@@ -6,11 +6,11 @@ View.Layout = function () {
 
     me.header = $("header");
 
-    me.model.projectList = null;
+    me.model.projectCatalog = null;
     me.model.layout = null;
 
-    me.setProjectListModel = function (projectListModel) {
-        me.model.projectList = projectListModel;
+    me.setProjectCatalogModel = function (projectCatalogModel) {
+        me.model.projectCatalog = projectCatalogModel;
     };
 
     me.setLayoutModel = function (layoutModel) {
@@ -24,7 +24,7 @@ View.Layout = function () {
         if (me.model.layout.activeProjectId !== null) {
 
             var projectId = me.model.layout.activeProjectId;
-            var project = me.model.projectList.get(projectId);
+            var project = me.model.projectCatalog.get(projectId);
 
             me.html += '<nav class="navbar navbar-inverse navbar-fixed-top">';
             me.html += '    <div class="container">';
@@ -41,8 +41,8 @@ View.Layout = function () {
             me.html += '            <form class="navbar-form navbar-left">';
             me.html += '                <div class="form-group">';
             me.html += '                    <select class="form-control" id="project-select">';
-            for (var i = 0; i < me.model.projectList.projects.length; i++) {
-                me.html += '                    <option value="' + me.model.projectList.projects[i].projectId + '">' + me.model.projectList.projects[i].name + '</option>';
+            for (var i = 0; i < me.model.projectCatalog.projects.length; i++) {
+                me.html += '                    <option value="' + me.model.projectCatalog.projects[i].projectId + '">' + me.model.projectCatalog.projects[i].name + '</option>';
             }
             me.html += '                    </select>';
             me.html += '                </div>';

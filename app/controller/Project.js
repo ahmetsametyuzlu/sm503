@@ -6,51 +6,51 @@ Controller.Project = function () {
 
     me.view.project = null;
 
-    me.model.projectList = null;
-    me.model.phaseList = null;
-    me.model.iterationList = null;
-    me.model.workItemList = null;
+    me.model.projectCatalog = null;
+    me.model.phaseCatalog = null;
+    me.model.iterationCatalog = null;
+    me.model.workItemCatalog = null;
 
     me.setProjectView = function (projectView) {
-        projectView.setProjectListModel(me.model.projectList);
-        projectView.setPhaseListModel(me.model.phaseList);
-        projectView.setIterationListModel(me.model.iterationList);
-        projectView.setWorkItemListModel(me.model.workItemList);
+        projectView.setProjectCatalogModel(me.model.projectCatalog);
+        projectView.setPhaseCatalogModel(me.model.phaseCatalog);
+        projectView.setIterationCatalogModel(me.model.iterationCatalog);
+        projectView.setWorkItemCatalogModel(me.model.workItemCatalog);
         me.view.project = projectView;
     };
 
-    me.setProjectListModel = function (projectListModel) {
-        me.model.projectList = projectListModel;
+    me.setProjectCatalogModel = function (projectCatalogModel) {
+        me.model.projectCatalog = projectCatalogModel;
     };
 
-    me.setPhaseListModel = function (phaseListModel) {
-        me.model.phaseList = phaseListModel;
+    me.setPhaseCatalogModel = function (phaseCatalogModel) {
+        me.model.phaseCatalog = phaseCatalogModel;
     };
 
-    me.setIterationListModel = function (iterationListModel) {
-        me.model.iterationList = iterationListModel;
+    me.setIterationCatalogModel = function (iterationCatalogModel) {
+        me.model.iterationCatalog = iterationCatalogModel;
     };
 
-    me.setWorkItemListModel = function (workItemListModel) {
-        me.model.workItemList = workItemListModel;
+    me.setWorkItemCatalogModel = function (workItemCatalogModel) {
+        me.model.workItemCatalog = workItemCatalogModel;
     };
 
     me.init = function () {
         // Set model(s)
-        me.setProjectListModel(Model.ProjectList.getInstance());
-        me.setPhaseListModel(Model.PhaseList.getInstance());
-        me.setIterationListModel(Model.IterationList.getInstance());
-        me.setWorkItemListModel(Model.WorkItemList.getInstance());
+        me.setProjectCatalogModel(Model.ProjectCatalog.getInstance());
+        me.setPhaseCatalogModel(Model.PhaseCatalog.getInstance());
+        me.setIterationCatalogModel(Model.IterationCatalog.getInstance());
+        me.setWorkItemCatalogModel(Model.WorkItemCatalog.getInstance());
         // Set view
         me.setProjectView(new View.Project());
         // Add listeners
-        me.addListeners();
+        me.addCatalogeners();
     };
 
-    me.addListeners = function () {
-        // Project List
+    me.addCatalogeners = function () {
+        // Project Catalog
         $(document).on('click', 'a[data-page="project-list"]', function (e) {
-            me.view.project.renderList();
+            me.view.project.renderCatalog();
         });
 
         // Project Create
@@ -93,15 +93,15 @@ Controller.Project = function () {
                 }
             }
 
-            if (me.model.projectList.getIndex(dataObj.projectId) !== false) {
-                me.model.projectList.update(dataObj.projectId, dataObj);
+            if (me.model.projectCatalog.getIndex(dataObj.projectId) !== false) {
+                me.model.projectCatalog.update(dataObj.projectId, dataObj);
             } else {
-                me.model.projectList.create(dataObj);
-                me.model.phaseList.generateForProject(dataObj.projectId);
-                me.model.iterationList.generateForPhases(me.model.phaseList.getListByProjectId(dataObj.projectId));
+                me.model.projectCatalog.create(dataObj);
+                me.model.phaseCatalog.generateForProject(dataObj.projectId);
+                me.model.iterationCatalog.generateForPhases(me.model.phaseCatalog.getCatalogByProjectId(dataObj.projectId));
             }
 
-            me.view.project.renderList();
+            me.view.project.renderCatalog();
         });
 
         // Project Delete
@@ -109,8 +109,8 @@ Controller.Project = function () {
             var projectId = parseInt($(this).data('project-id'));
             bootbox.confirm('Are you sure to delete this project with all related data?', function (d) {
                 if (d) {
-                    me.model.projectList.delete(projectId);
-                    me.view.project.renderList();
+                    me.model.projectCatalog.delete(projectId);
+                    me.view.project.renderCatalog();
                 }
             });
         });

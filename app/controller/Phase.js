@@ -6,27 +6,27 @@ Controller.Phase = function () {
 
     me.view.phase = null;
 
-    me.model.phaseList = null;
+    me.model.phaseCatalog = null;
 
     me.setPhaseView = function (phaseView) {
         me.view.phase = phaseView;
-        me.view.phase.setPhaseModel(me.model.phaseList);
+        me.view.phase.setPhaseModel(me.model.phaseCatalog);
     };
 
     me.setPhaseModel = function (phaseModel) {
-        me.model.phaseList = phaseModel;
+        me.model.phaseCatalog = phaseModel;
     };
 
     me.init = function () {
         // Set model(s)
-        me.setPhaseModel(Model.PhaseList.getInstance());
+        me.setPhaseModel(Model.PhaseCatalog.getInstance());
         // Set view
         me.setPhaseView(new View.Phase());
         // Add listeners
-        me.addListeners();
+        me.addCatalogeners();
     };
 
-    me.addListeners = function () {
+    me.addCatalogeners = function () {
 
         // Phase Edit
         $(document).on('click', 'a[data-page="phase-edit"]', function (e) {
@@ -50,7 +50,7 @@ Controller.Phase = function () {
                     return false;
                 }
             }
-            me.model.phaseList.save(dataObj);
+            me.model.phaseCatalog.save(dataObj);
 
             $('a[data-page="project-plan"]').click();
         });

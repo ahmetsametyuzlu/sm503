@@ -14,12 +14,12 @@ Controller.Home = function () {
         // Set view
         me.setHomeView(new View.Home());
         // Add listeners
-        me.addListeners();
+        me.addCatalogeners();
         // Render homepage by default
         me.view.home.render();
     };
 
-    me.addListeners = function () {
+    me.addCatalogeners = function () {
         $(document).on('click', 'a[data-page="home"]', function (e) {
             me.view.home.render();
         });

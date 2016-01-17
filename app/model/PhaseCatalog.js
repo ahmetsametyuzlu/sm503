@@ -1,6 +1,6 @@
 'use strict';
 
-Model.PhaseList = (function () {
+Model.PhaseCatalog = (function () {
 
     var Object = function () {
 
@@ -79,11 +79,11 @@ Model.PhaseList = (function () {
             return maxId + 1;
         };
 
-        me.getList = function () {
+        me.getCatalog = function () {
             return me.phases;
         };
 
-        me.getListByProjectId = function (projectId) {
+        me.getCatalogByProjectId = function (projectId) {
             return _.filter(me.phases, function (phase) {
                 return phase.targetProjectId == projectId;
             });
